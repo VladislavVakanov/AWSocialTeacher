@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AWST</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<form class="login-form" action="/login" method="POST">
+    <img src="files/AWST_logo.jpg">
+    <h1>Авторизация</h1><br>
+    <input type="text" id="username" name="username" placeholder="Логин" required>
+    <input type="password" id="password" name="password" placeholder="Пароль" required><br>
+    <input type="submit" value="ВОЙТИ">
+</form>
+</body>
+</html>

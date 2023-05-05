@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
-from user.models import User
-from user.forms import UserLoginForm
+from user.forms import UserLoginForm, UserProfileForm
+
 
 def login(request):
     if request.method == 'POST':
@@ -18,10 +19,24 @@ def login(request):
                     return HttpResponseRedirect('admin/')
                 else:
                     return HttpResponseRedirect(reverse('students'))
-
     else:
         form = UserLoginForm()
     context = {
         'form': form
     }
     return render(request, 'authorization/login.html', context)
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('user:profile'))
+    else:
+        form = UserProfileForm(instance=request.user)
+    context = {
+        'form': form
+    }
+    return render(request, 'authorization/profile.html', context)

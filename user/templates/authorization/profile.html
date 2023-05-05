@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>AWST</title>
+      <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+  </head>
+  <body>
+    <header>
+        <div class="rectangle">
+            <p href="" class="logo">AWST</p>
+        </div>
+        <div class="page-name">
+            <span>Личный кабинет</span>
+        </div>
+        <div class="navbar-container">
+            <nav class="navbar">
+                <ul>
+                    <a href="{% url 'user:profile' %}">
+                        <li class="item">
+                            <img src="{% static 'files/test.jpg' %}" alt="img">
+                            <div>&dtrif;</div>
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <form class="profile-form" action="{% url 'user:profile' %}" method="POST">
+        {% csrf_token %}
+        <div class="icon">
+            <img class="image" src="{% static 'files/test.jpg' %}">
+        </div>
+        <div class="container">
+            <div class="firstname">
+                {{ form.first_name }}
+            </div>
+            <div class="lastname">
+                {{ form.last_name }}
+            </div>
+            <div class="email">
+                {{ form.email }}
+            </div>
+            <div class="username">
+                {{ form.username }}
+            </div>
+            <div class="role">
+                {{ form.role }}
+            </div>
+            <div class="group">
+                {{ form.group_number }}
+            </div>
+            <div class="button">
+                <button value="Сохранить">Сохранить</button>
+            </div>
+        </div>
+    </form>
+    <form class="history-form">
+        <h3>История</h3>
+    </form>
+  </body>
+</html>

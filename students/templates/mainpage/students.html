@@ -1,10 +1,28 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-  <h1>STUDENTS</h1>
-</body>
+<html>
+  <head>
+      <title>AWST</title>
+      <link rel="stylesheet" href="{% static 'css/students.css' %}">
+  </head>
+  <body>
+    <header>
+        <div class="rectangle">
+            <p href="" class="logo">AWST</p>
+        </div>
+        <div class="navbar-container">
+            <nav class="navbar">
+                <ul>
+                    <a href="{% url 'user:profile' %}">
+                        <li class="item">
+                            <img src="{% static 'files/test.jpg' %}" alt="img">
+                            <div>&dtrif;</div>
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+        </div>
+    </header>
+  </body>
 </html>

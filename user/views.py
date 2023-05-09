@@ -18,7 +18,7 @@ def login(request):
                 if user.role == 'admin':
                     return HttpResponseRedirect('admin/')
                 else:
-                    return HttpResponseRedirect(reverse('students'))
+                    return HttpResponseRedirect('students/')
     else:
         form = UserLoginForm()
     context = {

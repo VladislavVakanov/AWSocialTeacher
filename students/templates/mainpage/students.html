@@ -9,15 +9,14 @@
   <body>
     <header>
         <div class="rectangle">
-            <p href="" class="logo">AWST</p>
+            <a href="{% url 'students:students'%}" class="logo">AWST</a>
         </div>
         <div class="navbar-container">
             <nav class="navbar">
                 <ul>
                     <a href="{% url 'user:profile' %}">
-                        <li class="item">
-                            <img src="{% static 'files/test.jpg' %}" alt="img">
-                            <div>&dtrif;</div>
+                        <li class="setting">
+                            <img src="{% static 'files/settings-icon.svg' %}" alt="img">
                         </li>
                     </a>
                 </ul>

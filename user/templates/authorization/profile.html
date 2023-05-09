@@ -10,7 +10,7 @@
   <body>
     <header>
         <div class="rectangle">
-            <p href="" class="logo">AWST</p>
+            <a href="{% url 'students:students' %}" class="logo">AWST</a>
         </div>
         <div class="page-name">
             <span>Личный кабинет</span>
@@ -20,45 +20,49 @@
                 <ul>
                     <a href="{% url 'user:profile' %}">
                         <li class="item">
-                            <img src="{% static 'files/test.jpg' %}" alt="img">
-                            <div>&dtrif;</div>
+                            <img src="{% static 'files/settings-icon.svg' %}" alt="img">
                         </li>
                     </a>
                 </ul>
             </nav>
         </div>
     </header>
-    <form class="profile-form" action="{% url 'user:profile' %}" method="POST">
-        {% csrf_token %}
-        <div class="icon">
-            <img class="image" src="{% static 'files/test.jpg' %}">
-        </div>
-        <div class="container">
-            <div class="firstname">
-                {{ form.first_name }}
+        <form class="profile-form" action="{% url 'user:profile' %}" method="POST">
+            {% csrf_token %}
+            <div class="icon">
+                <img class="image" src="{% static 'files/test.jpg' %}">
             </div>
-            <div class="lastname">
-                {{ form.last_name }}
+            <div class="title">
+                <h3>Информация</h3>
             </div>
-            <div class="email">
-                {{ form.email }}
+            <div class="data">
+                <div class="firstname">
+                    {{ form.first_name }}
+                </div>
+                <div class="lastname">
+                    {{ form.last_name }}
+                </div>
+                <div class="email">
+                    {{ form.email }}
+                </div>
+                <div class="username">
+                    {{ form.username }}
+                </div>
+                <div class="role">
+                    {{ form.role }}
+                </div>
+                <div class="group">
+                    {{ form.group_number }}
+                </div>
+                <div class="button">
+                    <button value="Сохранить">Сохранить</button>
+                </div>
             </div>
-            <div class="username">
-                {{ form.username }}
-            </div>
-            <div class="role">
-                {{ form.role }}
-            </div>
-            <div class="group">
-                {{ form.group_number }}
-            </div>
-            <div class="button">
-                <button value="Сохранить">Сохранить</button>
-            </div>
-        </div>
-    </form>
-    <form class="history-form">
-        <h3>История</h3>
-    </form>
+        </form>
+    <div class="history-container">
+        <form class="history-form">
+            <h3 style="color: #F2F3F4">История</h3>
+        </form>
+    </div>
   </body>
 </html>

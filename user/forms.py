@@ -33,18 +33,10 @@ class UserProfileForm(UserChangeForm):
     email = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-input'
     }))
-    role = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-input',
-        'readonly': True
-    }))
-    group_number = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-input',
-        'readonly': True
-    }))
     username = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-input'
     }))
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'role', 'group_number', 'email')
+        fields = ('first_name', 'last_name', 'username', 'email')

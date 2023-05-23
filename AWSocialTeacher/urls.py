@@ -4,11 +4,11 @@ from django.urls import path, include
 
 from user.views import login
 
-from students.views import students
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls'), name='user'),
-    path('', include('students.urls'), name='students'),
+    path('students/', include('students.urls'), name='students'),
 ]

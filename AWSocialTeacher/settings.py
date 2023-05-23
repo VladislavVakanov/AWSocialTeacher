@@ -70,7 +70,7 @@ WSGI_APPLICATION = 'AWSocialTeacher.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'AWST' ,
+        'NAME': 'macbook',
         'USER': 'macbook',
         'PASSWORD': '5560903e',
         'HOST': 'localhost',

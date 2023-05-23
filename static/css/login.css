@@ -3,19 +3,18 @@
   }
 
   .login-form {
-    background-color: #17202A;
+    background-color: #F2F3F4;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 600px;
     width: 450px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff;
+    color: #000;
     border-radius: 10px;
     font-size: 30px;
   }
@@ -23,14 +22,15 @@
   .login-form input {
     display: block;
     width: 350px;
-    height: 25px;
+    height: 30px;
     margin-bottom: 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #626567;
+    background-color: #F2F3F4;
     font-size: 18px;
     padding: 10px;
-    color: #fff;
+    color: #23262A;
+    border: none;
+    border-bottom: 1.3px solid #909497;
+    padding-left: 20px;
   }
 
   .login-form input:focus {
@@ -39,7 +39,7 @@
 
   .login-form input[type="login"]::placeholder,
   .login-form input[type="password"]::placeholder {
-    color: #bbb;
+    color: #33383E;
     font-weight: 350;
   }
 
@@ -47,21 +47,42 @@
     margin-bottom: 30px;
   }
 
+  .login-form div[class="checkbox"] {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .login-form div[class="checkbox"] label {
+    font-size: 18px;
+    width: 100%;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+
+  .login-form input[class="save-entrance"] {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 15px;
+    border-radius: 14px;
+    background-color: #F2F3F4;
+    font-size: 10px;
+    color: #23262A;
+    border: 1.3px solid #DADCE0;
+  }
+
   .login-form button {
-    width: 350px;
+    width: 370px;
     height: 60px;
     margin-bottom: 15px;
-    border: 2px solid white;
-    border-radius: 20px;
+    border-radius: 14px;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 200;
     cursor: pointer;
-    transform: scale(0.8);
-    color: white;
-    background-color: #17202A;
+    color: #3390EC;
+    background-color: #F2F3F4;
+    border: none;
   }
 
   .login-form button:hover {
-    background-color: #DCDCDC;
-    transform: scale(0.78);
+    background-color: #EBF5FB;
   }

@@ -18,11 +18,11 @@ def login(request):
                 if user.role == 'admin':
                     return HttpResponseRedirect('admin/')
                 else:
-                    return HttpResponseRedirect('students/')
+                    return HttpResponseRedirect(reverse('students:show_students'))
     else:
         form = UserLoginForm()
     context = {
-        'form': form
+        'form': form,
     }
     return render(request, 'authorization/login.html', context)
 
@@ -31,12 +31,15 @@ def login(request):
 def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(instance=request.user, data=request.POST)
+
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = UserProfileForm(instance=request.user)
     context = {
-        'form': form
+        'form': form,
+        'role': request.user.role,
+        'group': request.user.group_number
     }
     return render(request, 'authorization/profile.html', context)

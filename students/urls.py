@@ -1,11 +1,15 @@
 from django.urls import path
 
-from students.views import show_all_students_for_curator, get_info_about_student
+from students.views import (StudentListView, StudentDetailView, show_psychologist_page, show_social_teacher_page,
+                            show_all_students_from_group_page)
 
 app_name = 'students'
 
 
 urlpatterns = [
-    path('', show_all_students_for_curator, name='show_students'),
-    path('student/<str:last_name>/', get_info_about_student, name='show_info_about_student'),
+    path('', StudentListView.as_view(), name='show_students'),
+    path('psychologist/', show_psychologist_page, name='show_psychologist_page'),
+    path('socialteacher/', show_social_teacher_page, name='show_social_teacher_page'),
+    path('student/<str:last_name>/', StudentDetailView.as_view(), name='show_info_about_student'),
+    path('student_list/group<int:group>/', show_all_students_from_group_page, name='show_students_list_page'),
 ]

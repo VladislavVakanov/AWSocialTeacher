@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Психолог</title>
+    <link rel="stylesheet" href="{% static 'css/students.css' %}">
+</head>
+<body>
+  <div class="content">
+        <header>
+            <div class="rectangle">
+                <a href="{% url 'students:show_psychologist_page'%}" class="logo">AWST</a>
+            </div>
+            <div class="navbar-container">
+                <nav class="navbar">
+                    <ul>
+                        <a href="{% url 'user:profile' %}">
+                            <li class="setting">
+                                <img src="{% static 'files/settings-icon.svg' %}" alt="img">
+                            </li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    </div>
+</body>
+</html>

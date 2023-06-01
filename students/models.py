@@ -1,5 +1,12 @@
-from user.models import User
+
 from django.db import models
+
+
+class Group(models.Model):
+    group_number = models.CharField(max_length=10, unique=True, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.group_number}'
 
 
 class Student(models.Model):
@@ -24,7 +31,7 @@ class Student(models.Model):
         (NOT_FULL, 'Неполная'),
     ]
     group_number = models.ForeignKey(
-        User, on_delete=models.CASCADE, db_column='group_number', db_constraint=False, max_length=10)
+        Group, on_delete=models.CASCADE, db_column='group_number', db_constraint=False, to_field='group_number')
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     otchestvo = models.CharField(max_length=128)
@@ -54,3 +61,6 @@ class Student(models.Model):
     invalid = models.CharField(max_length=3, null=True, choices=SUBMIT_CHOICES, blank=True)
     oprf = models.CharField(max_length=3, null=True, choices=SUBMIT_CHOICES, blank=True)
     circle = models.CharField(max_length=3, null=True, choices=SUBMIT_CHOICES, blank=True)
+
+    def __str__(self):
+        return f'{self.last_name} {self.first_name} {self.otchestvo}'

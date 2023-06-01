@@ -12,15 +12,15 @@
     <h3>AWST</h3>
     <br>
     {% csrf_token %}
-    {{ form.username }}
-    {{ form.password }}
-    <br>
-    <div class="checkbox">
-        <input class="save-entrance" type="checkbox">
-        <label>Сохранить вход</label>
+    <div class="bordered-input">
+        {{ form.username }}
+        <span class="label-text">Логин</span>
     </div>
-    <br>
-    <button>ВОЙТИ</button>
+    <div class="bordered-input">
+        {{ form.password }}
+        <span class="label-text">Пароль</span>
+    </div>
+    <button type="submit">ВОЙТИ</button>
 </form>
 </body>
 </html>

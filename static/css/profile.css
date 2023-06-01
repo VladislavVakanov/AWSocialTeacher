@@ -21,7 +21,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0px 0px 0px 0px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   }
 
@@ -36,10 +35,6 @@
     -ms-user-select: none;
     user-select: none;
     font: sans-serif;
-  }
-
-  header .logo:hover {
-    transform: scale(0.78);
   }
 
   header nav ul li {
@@ -80,47 +75,60 @@
     transform: scale(0.88);
   }
 
-  div[class="page-name"] {
+  .page-name {
     font-weight: 500;
     font-size: 16px;
     color: #F2F3F4;
   }
 
-  form[class="profile-form"] {
-    position: fixed;
-    margin-top: 30px;
-    margin-left: 60px;
-    background-color: #fff;
-    height: 650px;
-    width: 930px;
+  .forms-container {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    margin-top: 50px;
   }
 
-  form[class="history-form"] {
-    position: fixed;
-    display: flex;
-    margin-top: 30px;
-    margin-left: 1030px;
-    background-color: #fff;
-    height: 650px;
-    width: 350px;
+  .profile-form {
     justify-content: center;
+    width: 930px;
+    background-color: #F2F3F4;
+    border-radius: 10px;
+    overflow: auto;
+  }
+
+  .history-form {
+    justify-content: center;
+    background-color: #fff;
+    width: 350px;
+    margin: 0 60px 0 0;
+    border-radius: 10px;
   }
 
   .history-form h3 {
+    text-align: center;
+    height: 650;
     margin-top: 10px;
     text-color: #000;
   }
 
-  form div[class="icon"] {
-    position: fixed;
-    margin-top: 65px;
-    margin-left: 25px;
+  .form {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
   }
 
-  form img[class="image"] {
-    width: 300px;
-    width: 300px;
+  .image-wrapper {
+    margin-left: 30px;
+  }
+
+  .inputs-container {
+    margin-right: 30px;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 15px;
     border: 2px solid #DADCE0;
     display: block;
     -webkit-user-select: none;
@@ -129,13 +137,17 @@
     user-select: none;
   }
 
-  .bordered-input {
-      position: relative;
-      padding: 5px;
-      margin-bottom: 10px;
+  .icon {
+    width: 300px;
   }
 
-  form div div input[class="form-input"] {
+  .bordered-input {
+    position: relative;
+    padding: 5px;
+    margin-bottom: 30px;
+  }
+
+  .form-input {
     display: block;
     border: 1px solid #DADCE0;
     padding: 5px;
@@ -143,6 +155,7 @@
     width: 500px;
     padding: 15px;
     border-radius: 10px;
+    background-color: #F2F3F4;
     color: #23262A;
     font-size: 18px;
     font-weight: 300;
@@ -152,22 +165,19 @@
     position: absolute;
     top: -5px;
     left: 10px;
-    background-color: #fff;
+    background-color: #F2F3F4;
     color: #707579;
     padding: 0 5px;
     font-size: 14px;
     font-weight: 100;
   }
 
-  form div[class="data"] {
-    position: fixed;
+  .data {
     flex-direction: column;
     align-items: center;
-    margin-left: 375px;
-    margin-top: 70px;
   }
 
-  form div div input[class="form-input"]:focus {
+  .form-input:focus {
     outline: none;
   }
 
@@ -175,51 +185,45 @@
     display:flex;
   }
 
-  .profile-form button {
-    position: fixed;
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px 20px 0px;
+  }
+
+  .save-button {
     width: 350px;
     height: 60px;
-    margin-top: 580px;
-    margin-left: 463px;
     border-radius: 14px;
     font-size: 20px;
     font-weight: 200;
+    margin-right: 105px;
     cursor: pointer;
     color: #3390EC;
-    background-color: #fff;
+    background-color: #F2F3F4;
     border: none;
   }
 
-  .profile-form button:hover {
+  .save-button:hover {
     background-color: #EBF5FB;
   }
 
-  .title h3 {
-    position: fixed;
-    color: #000;
-    margin-left: 400px;
-    margin-bottom: 0px;
-    margin-top: 20px;
-  }
-
-  a[class="logout-button"] {
-    position: fixed;
+  .logout-button {
     width: 300px;
     height: 60px;
     padding-top: 17px;
-    margin-top: 610px;
-    margin-left: 90px;
     border-radius: 14px;
     font-size: 20px;
     font-weight: 200;
+    margin-left: 30px;
     cursor: pointer;
     color: #cf4252;
-    background-color: #fff;
+    background-color: #F2F3F4;
     border: none;
     text-align: center;
   }
 
-  a[class="logout-button"]:hover {
+  .logout-button:hover {
     background-color: #e5cccf;
   }
 
@@ -230,4 +234,43 @@
 
   .errorlist li {
     color: red;
+  }
+
+  .title {
+    padding: 18px 0 25px;
+  }
+
+  .title h3 {
+    text-align: center;
+    color: #000;
+  }
+
+  .form-image-input {
+    display: none;
+    width: 300px;
+  }
+
+  .custom-file-upload {
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+    padding: 15px 20px;
+    cursor: pointer;
+    background-color: #F2F3F4;
+    color: #3390EC;
+    border-radius: 14px;
+    font-size: 18px;
+    border: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-weight: 200;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .custom-file-upload:hover {
+    background-color: #EBF5FB;
   }

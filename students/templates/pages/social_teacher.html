@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AWST</title>
+    <link rel="stylesheet" href="{% static 'css/social_teacher.css' %}">
+</head>
+<body>
+    <div class="content">
+        <header>
+            <div class="rectangle">
+                <a href="{% url 'students:show_social_teacher_page' %}" class="logo">AWST</a>
+            </div>
+            <span class="nav-name">Список групп</span>
+            <div class="navbar-container">
+                <nav class="navbar">
+                    <ul>
+                        <a href="{% url 'user:profile' %}">
+                            <li class="setting">
+                                <img src="{% static 'files/settings-icon.svg' %}" alt="img">
+                            </li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        {% for group in groups %}
+            <div class="groups-container">
+                <a class="button" href="{% url 'students:show_students_list_page' group=group.group_number %}">
+                    Группа №{{ group.group_number }}
+                </a>
+            <div>
+        {% endfor %}
+    <div>
+</body>
+</html>

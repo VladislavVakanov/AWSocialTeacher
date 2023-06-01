@@ -9,14 +9,12 @@ class UserLoginForm(AuthenticationForm):
         'type': 'login',
         'id': 'username',
         'name': 'username',
-        'placeholder': 'Логин',
     }))
 
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'type': 'password',
         'id': 'password',
         'name': 'password',
-        'placeholder': 'Пароль'
     }))
 
     class Meta:
@@ -30,6 +28,9 @@ class UserProfileForm(UserChangeForm):
     }), required=False)
     last_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-input'
+    }), required=False)
+    image = forms.ImageField(widget=forms.FileInput(attrs={
+        'class': 'form-image-input'
     }), required=False)
     email = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-input'
@@ -48,4 +49,4 @@ class UserProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'role', 'group_number')
+        fields = ('first_name', 'last_name', 'image', 'username', 'email', 'role', 'group_number')

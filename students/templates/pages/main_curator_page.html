@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>AWST</title>
+      <link rel="stylesheet" href="{% static 'css/students.css' %}">
+  </head>
+  <body>
+    <div class="content">
+        <header>
+            <div class="rectangle">
+                <a href="{% url 'students:show_students'%}" class="logo">AWST</a>
+            </div>
+            <div class="navbar-container">
+                <nav class="navbar">
+                    <ul>
+                        <a href="{% url 'user:profile' %}">
+                            <li class="setting">
+                                <img src="{% static 'files/settings-icon.svg' %}" alt="img">
+                            </li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="sidebar">
+            <p>Группа: {{ group.group_number }}</p>
+        </div>
+        <div class="container">
+            {% for student in students %}
+                <a class="button" href="{% url 'students:show_info_about_student' last_name=student.last_name %}">
+                    <p class="name">{{ student.last_name }} {{ student.first_name }} {{ student.otchestvo }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+  </body>
+</html>

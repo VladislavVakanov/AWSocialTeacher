@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
 
-from students.models import Student
+from students.models import Student, Group
 from user.models import User
 
 
@@ -11,17 +11,17 @@ def is_curator(user):
     return user.is_authenticated and user.role == 'Куратор'
 
 
-
 @method_decorator(login_required, name='dispatch')
 @method_decorator(user_passes_test(is_curator), name='dispatch')
 class StudentListView(ListView):
     model = Student
-    template_name = 'mainpage/main_curator_page.html'
+    template_name = 'pages/main_curator_page.html'
     context_object_name = 'students'
     ordering = ['last_name']
 
     def get_queryset(self):
-        return super().get_queryset().filter(group_number=self.request.user.id)
+        print(self.request.user.groups.all()[0])
+        return super().get_queryset().filter(group_number=self.request.user.group_number)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -33,7 +33,7 @@ class StudentListView(ListView):
 @method_decorator(login_required, name='dispatch')
 class StudentDetailView(DetailView):
     model = Student
-    template_name = 'mainpage/student_page.html'
+    template_name = 'pages/student_page.html'
     context_object_name = 'student'
 
     def get_object(self):
@@ -43,13 +43,12 @@ class StudentDetailView(DetailView):
 
 @login_required
 def show_all_students_for_curator(request):
-    curator_index = User.objects.get(id=request.user.id)
-    students = curator_index.student_set.order_by('last_name')
+    students = Student.objects.filter(group_number=request.user.group_number)
     context = {
         'group': request.user.group_number,
         'students': students
     }
-    return render(request, 'mainpage/main_curator_page.html', context)
+    return render(request, 'pages/main_curator_page.html', context)
 
 
 @login_required
@@ -59,7 +58,7 @@ def get_info_about_student(request, last_name: str):
     context = {
         'student': student
     }
-    return render(request, 'mainpage/student_page.html', context)
+    return render(request, 'pages/student_page.html', context)
 
 
 @login_required
@@ -68,27 +67,33 @@ def show_psychologist_page(request):
         'user': request.user.role
     }
     print(request.user.role)
-    return render(request, 'mainpage/psychologist.html', context)
+    return render(request, 'pages/psychologist.html', context)
 
+
+# @login_required
+# def show_social_teacher_page(request):
+#     groups = User.objects.filter(group_number__isnull=False).exclude(group_number='').order_by('group_number')
+#     print(request.user.groups.all())
+#     context = {
+#         'user': request.user.role,
+#         'groups': groups
+#     }
+#     return render(request, 'pages/social_teacher.html', context)
 
 @login_required
 def show_social_teacher_page(request):
-    groups = User.objects.filter(group_number__isnull=False).exclude(group_number='').order_by('group_number')
+    groups = Group.objects.order_by('group_number')
     context = {
-        'user': request.user.role,
         'groups': groups
     }
-    return render(request, 'mainpage/social_teacher.html', context)
+    return render(request, 'pages/social_teacher.html', context)
 
 
 @login_required
 def show_all_students_from_group_page(request, group):
-    # groups = User.objects.filter(group_number__isnull=False).exclude(group_number='').order_by('group_number')
-    curator_index = User.objects.get(group_number=group)
-    students = curator_index.student_set.get_queryset()
-    print(students)
+    students = Student.objects.filter(group_number=group)
     context = {
-        'user': request.user.role,
-        # 'groups': groups
+        'group': group,
+        'students': students
     }
-    return render(request, 'mainpage/students_list_page.html', context)
+    return render(request, 'pages/students_list_page.html', context)

@@ -1,11 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView, LoginView
-from django.shortcuts import render, HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
 from user.forms import UserLoginForm, UserProfileForm
 from user.models import User
+
 
 class CustomLoginView(LoginView):
     template_name = 'pages/login.html'
@@ -27,14 +29,23 @@ class Logout(LogoutView):
     next_page = reverse_lazy('user:login')
 
 
-class ProfileView(LoginRequiredMixin, UpdateView):
-    model = User
-    template_name = 'pages/profile_page.html'
-    form_class = UserProfileForm
-    success_url = reverse_lazy('user:profile')
-
-    def get_object(self, queryset=None):
-        return self.request.user
+class ProfileView():
+    def profile(request):
+        if request.method == 'POST':
+            form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
+            if form.is_valid():
+                user_profile = User.objects.get(id=request.user.id)
+                if bool(request.FILES) == True:
+                    if user_profile.image:
+                        user_profile.image.delete()
+                form.save()
+                return HttpResponseRedirect(reverse_lazy('user:profile'))
+        else:
+            form = UserProfileForm(instance=request.user)
+        context = {
+            'form': form
+        }
+        return render(request, 'pages/profile_page.html', context)
 
 
 # def login(request):

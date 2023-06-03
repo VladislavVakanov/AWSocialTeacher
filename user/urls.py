@@ -8,5 +8,5 @@ app_name = 'user'
 urlpatterns = [
     path('', CustomLoginView.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
-    path('profile/', ProfileView.as_view(), name='profile')
+    path('profile/', ProfileView.profile, name='profile')
 ]

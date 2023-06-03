@@ -1,4 +1,4 @@
-
+from students.cities import CITIES
 from django.db import models
 
 
@@ -35,8 +35,9 @@ class Student(models.Model):
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     otchestvo = models.CharField(max_length=128)
+    image = models.ImageField(upload_to='student_images', blank=True)
     dateBirth = models.DateField(null=True, blank=True)
-    address = models.TextField(max_length=128, null=True, blank=True)
+    address = models.CharField(max_length=128,choices=CITIES, null=True, blank=True)
     sex = models.CharField(max_length=16, null=True, choices=SEX_CHOICES, blank=True)
     education_type = models.CharField(max_length=16, null=True, choices=TYPE_EDUCATION_CHOICE, blank=True)
     hostel = models.CharField(max_length=3, null=True, choices=SUBMIT_CHOICES, blank=True)

@@ -4,6 +4,7 @@ from django.core.validators import EmailValidator
 
 from user.models import User
 
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
         'type': 'login',

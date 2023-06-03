@@ -5,8 +5,210 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ student.last_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/student_list_page_style.css' %}">
 </head>
 <body>
-    <h1>{{ student.first_name }}</h1>
+    <header>
+        <div class="rectangle">
+            {% if user.role == "Куратор" %}
+                <a href="{% url 'students:show_students' %}" class="logo">AWST</a>
+            {% elif user.role == "Социальный педагог" %}
+                <a href="{% url 'students:show_social_teacher_page' %}" class="logo">AWST</a>
+            {% elif user.role == "Педагог-психолог" %}
+                <a href="{% url 'students:show_psychologist_page' %}" class="logo">AWST</a>
+            {% endif %}
+        </div>
+        <div class="page-name">
+            <span style="color: #000; margin-right: 50px; font-size: 19px;">Социальный паспорт учащегося</span>
+        </div>
+        <div class="navbar-container">
+            <nav class="navbar">
+                <ul>
+                    <a href="{% url 'user:profile' %}">
+                        <li class="item">
+                            <img src="{% static 'files/settings-icon.svg' %}" alt="img">
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="image-wrapper">
+            <div class= "icon">
+                <img class="image" src="{% if student.image %} {{ student.image.url }} {% else %} {% static 'files/no-photo.png' %} {% endif %}">
+            </div>
+            <div class="image-file">
+                    {{ form.image }}
+                <label for="id_image" class="custom-file-upload">Выбрать изображение</label>
+            </div>
+        </div>
+        <h3 class="chapter-name">Об учащемся</h3>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ form.last_name }}
+                    <span class="label-text">Фамилия</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.otchestvo }}
+                    <span class="label-text">Отчество</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.dateBirth }}
+                    <span class="label-text">Дата рождения</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.address }}
+                    <span class="label-text">Город</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.hostel }}
+                    <span class="label-text">Общежитие</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ form.first_name }}
+                    <span class="label-text">Имя</span>
+                </div>
+                <div class="bordered-input">
+                    <input class="form-input" value="{{ student.group_number }}" readonly required=False>
+                    <span class="label-text">Группа</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.sex }}
+                    <span class="label-text">Пол</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.education_type }}
+                    <span class="label-text">Тип обучения</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.foreigner }}
+                    <span class="label-text">Иностранные граждане, вид на жительство</span>
+                </div>
+            </div>
+        </div>
+        <h3 class="chapter-name">Характеристика семьи</h3>
+        <div class="container">
+            <div class="left-side">
+                 <div class="bordered-input">
+                    {{ form.type_of_family }}
+                    <span class="label-text">Тип семьи</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.guardianship }}
+                    <span class="label-text">Попечительство</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.low_income_family }}
+                    <span class="label-text">Малообеспеченная</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.refugees }}
+                    <span class="label-text">Беженцы, дополнительная защита</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ form.family_large }}
+                    <span class="label-text">Многодетная</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.family_large }}
+                    <span class="label-text">Приемная</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.family_students }}
+                    <span class="label-text">Семейные учащиеся</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.settlers }}
+                    <span class="label-text">Переселенцы(чернобыльцы)</span>
+                </div>
+            </div>
+        </div>
+        <div class="center-side">
+                <div class="bordered-input">
+                    {{ form.have_children_students }}
+                    <span class="label-text">Имеют детей</span>
+                </div>
+        </div>
+        <h3 class="chapter-name">Характеристика учащегося</h3>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ form.upo_students }}
+                    <span class="label-text">Находятся на государственном обеспечении в УПО</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.sop }}
+                    <span class="label-text">СОП</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.orphan_students }}
+                    <span class="label-text">Сирота</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ form.ngz_students }}
+                    <span class="label-text">НГЗ(отобраны у родителей, но решения суда нет)</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.ipr }}
+                    <span class="label-text">ИПР</span>
+                </div>
+            </div>
+        </div>
+        <h3 class="chapter-name">Общественная занятость</h3>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ form.brsm }}
+                    <span class="label-text">Член БРСМ</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ form.prof_souz }}
+                    <span class="label-text">Член профсоюза</span>
+                </div>
+            </div>
+        </div>
+        <div class="center-side">
+            <div class="bordered-input">
+                {{ form.self_government_student }}
+                <span class="label-text">Член актива ученического самоуправления(актив)</span>
+            </div>
+        </div>
+        <h3 class="chapter-name"">Группа здоровья</h3>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ form.invalid }}
+                    <span class="label-text">Инвалид</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ form.oprf }}
+                    <span class="label-text">ОПФР</span>
+                </div>
+            </div>
+        </div>
+        <h3 class="chapter-name">Занятость в кружках</h3>
+        <div class="center-side">
+            <div class="bordered-input">
+                {{ form.circles }}
+                <span class="label-text">Занимается в кружке</span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="save-button" type="submit" value="Сохранить">Сохранить</button>
+        </div>
+    </form>
 </body>
 </html>

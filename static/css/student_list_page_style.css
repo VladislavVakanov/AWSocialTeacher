@@ -1,14 +1,11 @@
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
     list-style: none;
     text-decoration: none;
   }
 
   body {
-    height: 100vh;
     background-color: #F2F3F4;
   }
 
@@ -50,8 +47,8 @@
   }
 
   header nav ul li img {
-    height: 35px;
-    width: 35px;
+    height: 28px;
+    width: 28px;
     color: #000;
     display: block;
     -webkit-user-select: none;
@@ -75,60 +72,36 @@
     transform: scale(0.88);
   }
 
-  .page-name {
-    font-weight: 500;
-    font-size: 16px;
-    color: #F2F3F4;
-  }
-
-  .forms-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-  }
-
-  .profile-form {
-    justify-content: center;
-    width: 930px;
-    background-color: #F2F3F4;
-    border-radius: 10px;
-    overflow: auto;
-  }
-
-  .history-form {
-    justify-content: center;
-    background-color: #fff;
-    width: 350px;
-    margin: 0 60px 0 0;
-    border-radius: 10px;
-  }
-
-  .history-form h3 {
-    text-align: center;
-    height: 650;
-    margin-top: 10px;
-    text-color: #000;
-  }
-
-  .form {
+  .container {
     display: flex;
     justify-content: space-between;
-    margin: 10px;
+  }
+  form {
+    margin: 30px 0 0 0;
+  }
+  .left-side {
+    margin: 0 0 0 100px;
+    padding-left: 50px;
+    padding-top: 10px;
+  }
+
+  .right-side {
+    margin: 0 100px 0 0px;
+    padding-right: 50px;
+    padding-top: 10px;
   }
 
   .image-wrapper {
-    margin-left: 30px;
-  }
-
-  .inputs-container {
-    margin-right: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 30px 0;
   }
 
   .image-wrapper img {
     width: 100%;
     height: 100%;
-    margin-bottom: 15px;
     border: 2px solid #DADCE0;
     display: block;
     -webkit-user-select: none;
@@ -139,6 +112,8 @@
 
   .icon {
     width: 300px;
+    height: 250px;
+    margin-bottom: 20px;
   }
 
   .bordered-input {
@@ -150,15 +125,48 @@
   .form-input {
     display: block;
     border: 1px solid #DADCE0;
-    padding: 5px;
-    height: 55px;
-    width: 500px;
+    height: 30px;
+    width: 450px;
     padding: 15px;
     border-radius: 10px;
     background-color: #F2F3F4;
     color: #23262A;
     font-size: 18px;
     font-weight: 300;
+    outline: none;
+  }
+
+  .form-choice-field {
+    display: block;
+    border: 1px solid #DADCE0;
+    padding: 5px;
+    height: 60px;
+    width: 480px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #F2F3F4;
+    color: #23262A;
+    font-size: 18px;
+    font-weight: 300;
+    outline: none;
+  }
+
+  .form-date-picker {
+    border: 1px solid #DADCE0;
+    padding: 5px;
+    height: 30px;
+    width: 450px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #F2F3F4;
+    color: #23262A;
+    font-size: 18px;
+    font-weight: 300;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .label-text {
@@ -170,79 +178,10 @@
     padding: 0 5px;
     font-size: 14px;
     font-weight: 100;
-  }
-
-  .data {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .form-input:focus {
-    outline: none;
-  }
-
-  .button {
-    display:flex;
-  }
-
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0px 20px 0px;
-  }
-
-  .save-button {
-    width: 350px;
-    height: 60px;
-    border-radius: 14px;
-    font-size: 20px;
-    font-weight: 200;
-    margin-right: 105px;
-    cursor: pointer;
-    color: #3390EC;
-    background-color: #F2F3F4;
-    border: none;
-  }
-
-  .save-button:hover {
-    background-color: #EBF5FB;
-  }
-
-  .logout-button {
-    width: 300px;
-    height: 60px;
-    padding-top: 17px;
-    border-radius: 14px;
-    font-size: 20px;
-    font-weight: 200;
-    margin-left: 30px;
-    cursor: pointer;
-    color: #cf4252;
-    background-color: #F2F3F4;
-    border: none;
-    text-align: center;
-  }
-
-  .logout-button:hover {
-    background-color: #e5cccf;
-  }
-
-  .errorlist {
-    margin-left: 10px;
-    margin-top: 2px;
-  }
-
-  .errorlist li {
-    color: red;
-  }
-
-  .title {
-    padding: 18px 0 25px;
-  }
-
-  .title h3 {
-    text-align: center;
-    color: #000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .form-image-input {
@@ -252,9 +191,9 @@
 
   .custom-file-upload {
     display: inline-block;
-    width: 300px;
-    height: 50px;
-    padding: 15px 20px;
+    width: 265px;
+    height: 20px;
+    padding: 15px 15px;
     cursor: pointer;
     background-color: #F2F3F4;
     color: #3390EC;
@@ -272,5 +211,39 @@
   }
 
   .custom-file-upload:hover {
+    background-color: #EBF5FB;
+  }
+
+  .chapter-name {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 20px 0;
+  }
+
+  .center-side {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px 50px 0px;
+  }
+
+  .save-button {
+    width: 480px;
+    height: 60px;
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: 200;
+    cursor: pointer;
+    color: #3390EC;
+    background-color: #F2F3F4;
+    border: none;
+  }
+
+  .save-button:hover {
     background-color: #EBF5FB;
   }

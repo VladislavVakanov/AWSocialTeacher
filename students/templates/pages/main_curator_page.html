@@ -7,10 +7,9 @@
       <link rel="stylesheet" href="{% static 'css/students.css' %}">
   </head>
   <body>
-    <div class="content">
         <header>
             <div class="rectangle">
-                <a href="{% url 'students:show_students'%}" class="logo">AWST</a>
+                <a href="{% url 'students:show_curator_page'%}" class="logo">AWST</a>
             </div>
             <div class="navbar-container">
                 <nav class="navbar">
@@ -24,16 +23,22 @@
                 </nav>
             </div>
         </header>
-        <div class="sidebar">
-            <p>Группа: {{ group.group_number }}</p>
+        <div class="content">
+            <div class="sidebar">
+                <p>Группа: {{ group.group_number }}</p>
+            </div>
+            <div class="container">
+                {% for student in students %}
+                    <a class="button" href="{{ student.get_url }}">
+                        <p class="name">{{ student.last_name }} {{ student.first_name }} {{ student.otchestvo }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="container">
+            <a class="report-button" href="{% url 'students:show_group_reports' group=group %}">
+                <p class="name">Посмотреть отчеты</p>
+            </a>
         </div>
-        <div class="container">
-            {% for student in students %}
-                <a class="button" href="{% url 'students:show_info_about_student' last_name=student.last_name %}">
-                    <p class="name">{{ student.last_name }} {{ student.first_name }} {{ student.otchestvo }}</p>
-                </a>
-            {% endfor %}
         </div>
-    </div>
   </body>
 </html>

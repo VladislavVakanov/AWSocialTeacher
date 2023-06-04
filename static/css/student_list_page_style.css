@@ -1,6 +1,7 @@
   * {
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
     list-style: none;
     text-decoration: none;
   }
@@ -10,6 +11,9 @@
   }
 
   header {
+    position: fixed;
+    z-index: 9999;
+    opacity: 1;
     height: 70px;
     top: 0;
     left: 0;
@@ -47,8 +51,8 @@
   }
 
   header nav ul li img {
-    height: 28px;
-    width: 28px;
+    height: 35px;
+    width: 35px;
     color: #000;
     display: block;
     -webkit-user-select: none;
@@ -70,6 +74,10 @@
     background-color: #F2F3F4;
     color: #fff;
     transform: scale(0.88);
+  }
+
+  .content {
+    margin: 100px 0 0 0;
   }
 
   .container {
@@ -135,6 +143,7 @@
     font-weight: 300;
     outline: none;
   }
+
 
   .form-choice-field {
     display: block;
@@ -229,11 +238,11 @@
   .button-container {
     display: flex;
     justify-content: center;
-    margin: 100px 0px 50px 0px;
+    margin: 40px 0px 50px 0px;
   }
 
   .save-button {
-    width: 480px;
+    width: 400px;
     height: 60px;
     border-radius: 14px;
     font-size: 20px;
@@ -241,9 +250,71 @@
     cursor: pointer;
     color: #3390EC;
     background-color: #F2F3F4;
-    border: none;
+    border: 1px solid grey;
   }
 
   .save-button:hover {
     background-color: #EBF5FB;
+    transform: scale(0.97);
+  }
+
+
+  .form-text-area {
+    display: block;
+    border: 1px solid #DADCE0;
+    height: 80px;
+    width: 450px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #F2F3F4;
+    color: #23262A;
+    font-size: 18px;
+    font-weight: 300;
+    outline: none;
+  }
+
+  .section-name {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0 0 0;
+  }
+
+  .table-container {
+    margin: 50px 100px 70px 100px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    top: 10;
+    text-align: center;
+  }
+
+  .table-name {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 30px 0;
+    font-weight: 400;
   }

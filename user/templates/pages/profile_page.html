@@ -12,7 +12,7 @@
         <header>
             <div class="rectangle">
                 {% if user.role == "Куратор" %}
-                    <a href="{% url 'students:show_students' %}" class="logo">AWST</a>
+                    <a href="{% url 'students:show_curator_page' %}" class="logo">AWST</a>
                 {% elif user.role == "Социальный педагог" %}
                     <a href="{% url 'students:show_social_teacher_page' %}" class="logo">AWST</a>
                 {% elif user.role == "Педагог-психолог" %}

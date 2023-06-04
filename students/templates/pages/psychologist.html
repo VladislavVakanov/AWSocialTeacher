@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>AWST</title>
-    <link rel="stylesheet" href="{% static 'css/students.css' %}">
+    <link rel="stylesheet" href="{% static 'css/social_teacher.css' %}">
 </head>
 <body>
   <div class="content">
@@ -25,6 +25,13 @@
                 </nav>
             </div>
         </header>
+      {% for group in groups %}
+            <div class="groups-container">
+                <a class="button" href="{{ group.get_url }}">
+                    Группа №{{ group.group_number }}
+                </a>
+            <div>
+        {% endfor %}
     </div>
 </body>
 </html>

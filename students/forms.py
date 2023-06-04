@@ -1,6 +1,7 @@
 from django import forms
 
-from students.models import Student
+from students.models import (Student, AntisocialBehavior, SpecialistRecomendations,
+                             Incentives, IndividualWork, WorkWithParents)
 from students.cities import CITIES_FOR_FORM
 
 
@@ -40,7 +41,7 @@ class StudentForm(forms.ModelForm):
     }), required=False)
     dateBirth = forms.DateField(widget=forms.DateInput(attrs={
         'class': 'form-date-picker',
-        'type': 'date'
+        'placeholder': '00.00.0000'
     }), required=False)
     address = forms.ChoiceField(choices=CITIES_FOR_FORM, widget=forms.Select(attrs={
         'class': 'form-choice-field',
@@ -114,11 +115,29 @@ class StudentForm(forms.ModelForm):
     oprf = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
         'class': 'form-choice-field',
     }), required=False)
-    circles = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
+    circle = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
         'class': 'form-choice-field',
     }), required=False)
     image = forms.ImageField(widget=forms.FileInput(attrs={
         'class': 'form-image-input'
+    }), required=False)
+    citizenship = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-input'
+    }), required=False)
+    health = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }), required=False)
+    hobbies = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }), required=False)
+    conditions = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }), required=False)
+    other_info = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }), required=False)
+    place_living = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-input'
     }), required=False)
 
     class Meta:
@@ -127,4 +146,84 @@ class StudentForm(forms.ModelForm):
                   'hostel', 'foreigner', 'type_of_family', 'family_large', 'guardianship', 'family_foster',
                   'low_income_family', 'refugees', 'settlers', 'family_students', 'have_children_students',
                   'upo_students', 'ngz_students', 'sop', 'ipr', 'orphan_students', 'brsm', 'prof_souz',
-                  'self_government_student', 'invalid', 'oprf', 'circles')
+                  'self_government_student', 'invalid', 'oprf', 'circle', 'citizenship', 'health', 'hobbies',
+                  'conditions', 'other_info', 'place_living')
+
+
+class AntisocialBehaviorForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(attrs={
+        'class': 'form-date-picker',
+        'type': 'date'
+    }))
+    character = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    meri = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    result = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    class Meta:
+        model = AntisocialBehavior
+        fields = ('date', 'character', 'meri', 'result')
+
+
+class SpecialistRecomendationsForm(forms.ModelForm):
+    recomendations = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    result = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    class Meta:
+        model = SpecialistRecomendations
+        fields = ('recomendations', 'result')
+
+
+class IncentivesForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(attrs={
+        'class': 'form-date-picker',
+        'type': 'date'
+    }))
+    achievements = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    form_of_incentives = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    class Meta:
+        model = Incentives
+        fields = ('date', 'achievements', 'form_of_incentives')
+
+
+class IndividualWorkForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(attrs={
+        'class': 'form-date-picker',
+        'type': 'date'
+    }))
+    content = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    result = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    class Meta:
+        model = IndividualWork
+        fields = ('date', 'content', 'result')
+
+
+class WorkWithParentsForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(attrs={
+        'class': 'form-date-picker',
+        'type': 'date'
+    }))
+    content = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    result = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-text-area'
+    }))
+    class Meta:
+        model = WorkWithParents
+        fields = ('date', 'content', 'result')

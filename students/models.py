@@ -1,12 +1,49 @@
+from django.urls import reverse
+
 from students.cities import CITIES
 from django.db import models
+
+from django.utils.text import slugify
 
 
 class Group(models.Model):
     group_number = models.CharField(max_length=10, unique=True, null=True, blank=True)
 
+    def get_url(self):
+        return reverse('students:show_students_list_page', args=[self.group_number])
+
+
     def __str__(self):
         return f'{self.group_number}'
+
+class AntisocialBehavior(models.Model):
+    date = models.DateField(null=False, blank=False, verbose_name='Дата')
+    character = models.TextField(null=False, blank=False, verbose_name='Характер проявления')
+    meri = models.TextField(null=False, blank=False, verbose_name='Меры')
+    result = models.TextField(null=False, blank=False, verbose_name='Результат')
+
+
+class SpecialistRecomendations(models.Model):
+    recomendations = models.TextField(null=False, blank=False, verbose_name='Рекомендации')
+    result = models.TextField(null=False, blank=False, verbose_name='Результат')
+
+
+class Incentives(models.Model):
+    date = models.DateField(null=False, blank=False, verbose_name='Дата')
+    achievements = models.TextField(null=False, blank=False, verbose_name='За какие достижения')
+    form_of_incentives = models.TextField(null=False, blank=False, verbose_name='Форма поощрения')
+
+
+class IndividualWork(models.Model):
+    date = models.DateField(null=False, blank=False, verbose_name='Дата')
+    content = models.TextField(null=False, blank=False, verbose_name='Содержание работы')
+    result = models.TextField(null=False, blank=False, verbose_name='Результат')
+
+
+class WorkWithParents(models.Model):
+    date = models.DateField(null=False, blank=False, verbose_name='Дата')
+    content = models.TextField(null=False, blank=False, verbose_name='Содержание работы')
+    result = models.TextField(null=False, blank=False, verbose_name='Результат')
 
 
 class Student(models.Model):
@@ -62,6 +99,20 @@ class Student(models.Model):
     invalid = models.CharField(max_length=3, null=True, choices=SUBMIT_CHOICES, blank=True)
     oprf = models.CharField(max_length=3, null=True, choices=SUBMIT_CHOICES, blank=True)
     circle = models.CharField(max_length=3, null=True, choices=SUBMIT_CHOICES, blank=True)
+    antisocial_behavior = models.ManyToManyField(AntisocialBehavior)
+    specialist_recommendations = models.ManyToManyField(SpecialistRecomendations, blank=True)
+    incentives = models.ManyToManyField(Incentives, blank=True)
+    individualwork = models.ManyToManyField(IndividualWork, blank=True)
+    workwithparents = models.ManyToManyField(WorkWithParents, blank=True)
+    citizenship = models.CharField(max_length=32, null=True, blank=True)
+    health = models.TextField(null=True, blank=True)
+    hobbies = models.TextField(null=True, blank=True)
+    conditions = models.TextField(null=True, blank=True)
+    other_info = models.TextField(null=True, blank=True)
+    place_living = models.CharField(max_length=128, null=True, blank=True)
+
+    def get_url(self):
+        return reverse('students:show_info_about_student', args=[self.group_number,self.last_name])
 
     def __str__(self):
         return f'{self.last_name} {self.first_name} {self.otchestvo}'

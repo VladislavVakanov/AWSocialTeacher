@@ -1,14 +1,12 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: sans-serif;
     list-style: none;
     text-decoration: none;
   }
 
   body {
-    height: 100vh;
     background-color: #F2F3F4;
   }
 
@@ -24,8 +22,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0px 0px 0px 0px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .content {
+    margin: 100px 0 0 0;
   }
 
   header .logo {
@@ -41,10 +42,6 @@
     font: sans-serif;
   }
 
-  header .logo: hover {
-    transform: scale(1.5);
-  }
-
   header nav ul li {
     position: relative;
     float: left;
@@ -57,14 +54,10 @@
     margin-right: 20px;
   }
 
-  .groups-bar {
-    margin-left: 10px;
-    margin-top: 10px;
-  }
-
   header nav ul li img {
     height: 35px;
     width: 35px;
+    color: #000;
     display: block;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -78,31 +71,54 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    color: #000;
+  }
+
+  header nav ul li:hover {
+    background-color: #F2F3F4;
     color: #fff;
+    transform: scale(0.88);
   }
 
-  .content {
-    margin: 90px 0 0 0;
+  .table-container {
+    margin: 30px 0 0 0;
   }
 
-  .groups-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 15px;
+  table {
+    border-collapse: collapse;
+    width: 100%;
   }
 
-  .button {
-    font-size: 18px;
-    background-color: #fff;
-    border-radius: 20px;
-    color: #47BDFF;
-    font-weight: 300;
-    padding-top: 20px;
-    width: 1000px;
-    height: 60px;
-    outline: none;
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px;
     text-align: center;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    top: 10;
+    text-align: center;
+  }
+
+  .table-name {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 30px 0;
+    font-weight: 400;
   }
 
   .nav-name {
@@ -110,4 +126,3 @@
     font-weight: 1000;
     font-size: 18px;
   }
-

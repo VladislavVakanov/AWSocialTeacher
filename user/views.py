@@ -18,7 +18,7 @@ class CustomLoginView(LoginView):
         if user.role == 'admin':
             return reverse_lazy('admin:index')
         elif user.role == 'Куратор':
-            return reverse_lazy('students:show_students')
+            return reverse_lazy('students:show_curator_page')
         elif user.role == 'Социальный педагог':
             return reverse_lazy('students:show_social_teacher_page')
         elif user.role == 'Педагог-психолог':

@@ -11,8 +11,15 @@
     <div class="content">
         <header>
             <div class="rectangle">
-                <a href="{% url 'students:show_students'%}" class="logo">AWST</a>
+                {% if user.role == "Куратор" %}
+                    <a href="{% url 'students:show_curator_page' %}" class="logo">AWST</a>
+                {% elif user.role == "Социальный педагог" %}
+                    <a href="{% url 'students:show_social_teacher_page' %}" class="logo">AWST</a>
+                {% elif user.role == "Педагог-психолог" %}
+                    <a href="{% url 'students:show_psychologist_page' %}" class="logo">AWST</a>
+                {% endif %}
             </div>
+            <span class="nav-name">Список учащихся</span>
             <div class="navbar-container">
                 <nav class="navbar">
                     <ul>
@@ -30,10 +37,15 @@
         </div>
         <div class="container">
             {% for student in students %}
-                <a class="button" href="{% url 'students:show_info_about_student' last_name=student.last_name %}">
+                <a class="button" href="{{ student.get_url }}">
                     <p class="name">{{ student.last_name }} {{ student.first_name }} {{ student.otchestvo }}</p>
                 </a>
             {% endfor %}
+        </div>
+        <div class="button-container">
+            <a class="report-button" href="{% url 'students:show_group_reports' group=group %}">
+                Посмотреть отчеты
+            </a>
         </div>
     </div>
 </body>

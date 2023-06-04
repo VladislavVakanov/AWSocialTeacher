@@ -1,0 +1,200 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <link rel="stylesheet" href="{% static 'css/report_page_style.css' %}">
+</head>
+<body>
+        <header>
+            <div class="rectangle">
+                {% if user.role == "Куратор" %}
+                    <a href="{% url 'students:show_curator_page' %}" class="logo">AWST</a>
+                {% elif user.role == "Социальный педагог" %}
+                    <a href="{% url 'students:show_social_teacher_page' %}" class="logo">AWST</a>
+                {% elif user.role == "Педагог-психолог" %}
+                    <a href="{% url 'students:show_psychologist_page' %}" class="logo">AWST</a>
+                {% endif %}
+            </div>
+            <span class="nav-name">Отчет по группе</span>
+            <div class="navbar-container">
+                <nav class="navbar">
+                    <ul>
+                        <a href="{% url 'user:profile' %}">
+                            <li class="setting">
+                                <img src="{% static 'files/settings-icon.svg' %}" alt="img">
+                            </li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="content">
+        <div class="table-container">
+            <h2 class="table-name">СОЦИАЛЬНО-ПЕДАГОГИЧЕСКАЯ ХАРАКТЕРИСТИКА группы № {{ group }}</h2>
+            <h2 class="table-name">УО "МГК цифровых технологий" на {{ date.day}}.{{ date.month}}.{{ date.year}}г.</h2>
+            <table border="1">
+              <tr>
+                <th colspan="1"></th>
+                <th colspan="10">Кол-во учащихся</th>
+                <th colspan="9">Характеристика семей</th>
+                <th colspan="8">Характеристика учащихся</th>
+                <th colspan="3">Общественная занятость</th>
+                <th colspan="2">Группа здоровья</th>
+                <th colspan="2">Занятость в кружках</th>
+              </tr>
+              <tr>
+                <td class="vertical-text"></td>
+                <td class="vertical-text">Общее</td>
+                <td class="vertical-text">Бюджет</td>
+                <td class="vertical-text">Внебюджет</td>
+                <td class="vertical-text">Юноши</td>
+                <td class="vertical-text">Девушки</td>
+                <td class="vertical-text">Несовершеннолетние</td>
+                <td class="vertical-text">Совершеннолетние</td>
+                <td class="vertical-text">Иногородние</td>
+                <td class="vertical-text">Проживают в общежитии</td>
+                <td class="vertical-text">Иностранные граждане, вид на жительство</td>
+                <td class="vertical-text">Неполная</td>
+                <td class="vertical-text">Многодетная</td>
+                <td class="vertical-text">Попечительство</td>
+                <td class="vertical-text">Приемная</td>
+                <td class="vertical-text">Малообеспеченная</td>
+                <td class="vertical-text">Беженцы, дополнительная защита</td>
+                <td class="vertical-text">Переселенцы(чернобыльцы)</td>
+                <td class="vertical-text">Семейные учащиеся</td>
+                <td class="vertical-text">Имеют детей</td>
+                <td class="vertical-text">Находятся на государственном обеспечении в УПО</td>
+                <td class="vertical-text">НГЗ(отобраны у родителей, но решения суда нет)</td>
+                <td class="vertical-text">СОП</td>
+                <td class="vertical-text">ИПР</td>
+                <td class="vertical-text">Дети-сироты</td>
+                <td class="vertical-text">Лица из числа детей-сирот</td>
+                <td class="vertical-text">Дети, оставшиеся без попечения родителей</td>
+                <td class="vertical-text">Лица из числа детей, оставшихся без попечения родителей</td>
+                <td class="vertical-text">Члены БРСМ</td>
+                <td class="vertical-text">Члены профсоюза</td>
+                <td class="vertical-text">Члены актива ученического самоуправления(актив)</td>
+                <td class="vertical-text">Инвалиды</td>
+                <td class="vertical-text">ОПФР</td>
+                <td class="vertical-text">Да</td>
+                <td class="vertical-text">Нет</td>
+              </tr>
+              <tr>
+                <td class="vertical-text">Ячейка 2.1</td>
+                <td class="vertical-text">Ячейка 2.2</td>
+                <td class="vertical-text">Ячейка 2.3</td>
+                <td class="vertical-text">Ячейка 2.4</td>
+                <td class="vertical-text">Ячейка 2.5</td>
+                <td class="vertical-text">Ячейка 2.6</td>
+                <td class="vertical-text">Ячейка 2.7</td>
+                <td class="vertical-text">Ячейка 2.8</td>
+                <td class="vertical-text">Ячейка 2.9</td>
+                <td class="vertical-text">Ячейка 2.10</td>
+                <td class="vertical-text">Ячейка 3.1</td>
+                <td class="vertical-text">Ячейка 3.2</td>
+                <td class="vertical-text">Ячейка 3.3</td>
+                <td class="vertical-text">Ячейка 3.4</td>
+                <td class="vertical-text">Ячейка 3.5</td>
+                <td class="vertical-text">Ячейка 3.6</td>
+                <td class="vertical-text">Ячейка 3.7</td>
+                <td class="vertical-text">Ячейка 3.8</td>
+                <td class="vertical-text">Ячейка 3.9</td>
+                <td class="vertical-text">Ячейка 4.1</td>
+                <td class="vertical-text">Ячейка 4.2</td>
+                <td class="vertical-text">Ячейка 4.3</td>
+                <td class="vertical-text">Ячейка 4.4</td>
+                <td class="vertical-text">Ячейка 4.5</td>
+                <td class="vertical-text">Ячейка 4.6</td>
+                <td class="vertical-text">Ячейка 4.7</td>
+                <td class="vertical-text">Ячейка 4.8</td>
+                <td class="vertical-text">Ячейка 5.1</td>
+                <td class="vertical-text">Ячейка 5.2</td>
+                <td class="vertical-text">Ячейка 5.3</td>
+                <td class="vertical-text">Ячейка 6.1</td>
+                <td class="vertical-text">Ячейка 6.2</td>
+                <td class="vertical-text">Ячейка 7.1</td>
+                <td class="vertical-text">Ячейка 7.2</td>
+                <td class="vertical-text">Ячейка 7.3</td>
+              </tr>
+              <tr>
+                <td class="vertical-text">Ячейка 2.1</td>
+                <td class="vertical-text">Ячейка 2.2</td>
+                <td class="vertical-text">Ячейка 2.3</td>
+                <td class="vertical-text">Ячейка 2.4</td>
+                <td class="vertical-text">Ячейка 2.5</td>
+                <td class="vertical-text">Ячейка 2.6</td>
+                <td class="vertical-text">Ячейка 2.7</td>
+                <td class="vertical-text">Ячейка 2.8</td>
+                <td class="vertical-text">Ячейка 2.9</td>
+                <td class="vertical-text">Ячейка 2.10</td>
+                <td class="vertical-text">Ячейка 3.1</td>
+                <td class="vertical-text">Ячейка 3.2</td>
+                <td class="vertical-text">Ячейка 3.3</td>
+                <td class="vertical-text">Ячейка 3.4</td>
+                <td class="vertical-text">Ячейка 3.5</td>
+                <td class="vertical-text">Ячейка 3.6</td>
+                <td class="vertical-text">Ячейка 3.7</td>
+                <td class="vertical-text">Ячейка 3.8</td>
+                <td class="vertical-text">Ячейка 3.9</td>
+                <td class="vertical-text">Ячейка 4.1</td>
+                <td class="vertical-text">Ячейка 4.2</td>
+                <td class="vertical-text">Ячейка 4.3</td>
+                <td class="vertical-text">Ячейка 4.4</td>
+                <td class="vertical-text">Ячейка 4.5</td>
+                <td class="vertical-text">Ячейка 4.6</td>
+                <td class="vertical-text">Ячейка 4.7</td>
+                <td class="vertical-text">Ячейка 4.8</td>
+                <td class="vertical-text">Ячейка 5.1</td>
+                <td class="vertical-text">Ячейка 5.2</td>
+                <td class="vertical-text">Ячейка 5.3</td>
+                <td class="vertical-text">Ячейка 6.1</td>
+                <td class="vertical-text">Ячейка 6.2</td>
+                <td class="vertical-text">Ячейка 7.1</td>
+                <td class="vertical-text">Ячейка 7.2</td>
+                <td class="vertical-text">Ячейка 7.3</td>
+              </tr>
+              <tr>
+                <td class="vertical-text">Ячейка 2.1</td>
+                <td class="vertical-text">Ячейка 2.2</td>
+                <td class="vertical-text">Ячейка 2.3</td>
+                <td class="vertical-text">Ячейка 2.4</td>
+                <td class="vertical-text">Ячейка 2.5</td>
+                <td class="vertical-text">Ячейка 2.6</td>
+                <td class="vertical-text">Ячейка 2.7</td>
+                <td class="vertical-text">Ячейка 2.8</td>
+                <td class="vertical-text">Ячейка 2.9</td>
+                <td class="vertical-text">Ячейка 2.10</td>
+                <td class="vertical-text">Ячейка 3.1</td>
+                <td class="vertical-text">Ячейка 3.2</td>
+                <td class="vertical-text">Ячейка 3.3</td>
+                <td class="vertical-text">Ячейка 3.4</td>
+                <td class="vertical-text">Ячейка 3.5</td>
+                <td class="vertical-text">Ячейка 3.6</td>
+                <td class="vertical-text">Ячейка 3.7</td>
+                <td class="vertical-text">Ячейка 3.8</td>
+                <td class="vertical-text">Ячейка 3.9</td>
+                <td class="vertical-text">Ячейка 4.1</td>
+                <td class="vertical-text">Ячейка 4.2</td>
+                <td class="vertical-text">Ячейка 4.3</td>
+                <td class="vertical-text">Ячейка 4.4</td>
+                <td class="vertical-text">Ячейка 4.5</td>
+                <td class="vertical-text">Ячейка 4.6</td>
+                <td class="vertical-text">Ячейка 4.7</td>
+                <td class="vertical-text">Ячейка 4.8</td>
+                <td class="vertical-text">Ячейка 5.1</td>
+                <td class="vertical-text">Ячейка 5.2</td>
+                <td class="vertical-text">Ячейка 5.3</td>
+                <td class="vertical-text">Ячейка 6.1</td>
+                <td class="vertical-text">Ячейка 6.2</td>
+                <td class="vertical-text">Ячейка 7.1</td>
+                <td class="vertical-text">Ячейка 7.2</td>
+                <td class="vertical-text">Ячейка 7.3</td>
+              </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{% static 'css/social_teacher.css' %}">
 </head>
 <body>
-    <div class="content">
         <header>
             <div class="rectangle">
                 <a href="{% url 'students:show_social_teacher_page' %}" class="logo">AWST</a>
@@ -26,13 +25,14 @@
                 </nav>
             </div>
         </header>
+        <div class="content">
         {% for group in groups %}
             <div class="groups-container">
-                <a class="button" href="{% url 'students:show_students_list_page' group=group.group_number %}">
+                <a class="button" href="{{ group.get_url }}">
                     Группа №{{ group.group_number }}
                 </a>
             <div>
         {% endfor %}
-    <div>
+        <div>
 </body>
 </html>

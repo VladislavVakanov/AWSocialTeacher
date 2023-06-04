@@ -11,7 +11,7 @@
     <header>
         <div class="rectangle">
             {% if user.role == "Куратор" %}
-                <a href="{% url 'students:show_students' %}" class="logo">AWST</a>
+                <a href="{% url 'students:show_curator_page' %}" class="logo">AWST</a>
             {% elif user.role == "Социальный педагог" %}
                 <a href="{% url 'students:show_social_teacher_page' %}" class="logo">AWST</a>
             {% elif user.role == "Педагог-психолог" %}
@@ -33,6 +33,7 @@
             </nav>
         </div>
     </header>
+    <div class="content">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="image-wrapper">
@@ -60,6 +61,10 @@
                     <span class="label-text">Дата рождения</span>
                 </div>
                 <div class="bordered-input">
+                    {{ form.citizenship }}
+                    <span class="label-text">Гражданство</span>
+                </div>
+                <div class="bordered-input">
                     {{ form.address }}
                     <span class="label-text">Город</span>
                 </div>
@@ -78,6 +83,10 @@
                     <span class="label-text">Группа</span>
                 </div>
                 <div class="bordered-input">
+                    {{ form.place_living }}
+                    <span class="label-text">Место проживания в период обучения</span>
+                </div>
+                <div class="bordered-input">
                     {{ form.sex }}
                     <span class="label-text">Пол</span>
                 </div>
@@ -88,6 +97,20 @@
                 <div class="bordered-input">
                     {{ form.foreigner }}
                     <span class="label-text">Иностранные граждане, вид на жительство</span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ form.conditions }}
+                    <span class="label-text">Социально - бытовые условия</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ form.hobbies }}
+                    <span class="label-text">Увлечения</span>
                 </div>
             </div>
         </div>
@@ -131,10 +154,10 @@
             </div>
         </div>
         <div class="center-side">
-                <div class="bordered-input">
-                    {{ form.have_children_students }}
-                    <span class="label-text">Имеют детей</span>
-                </div>
+            <div class="bordered-input">
+                {{ form.have_children_students }}
+                <span class="label-text">Имеют детей</span>
+            </div>
         </div>
         <h3 class="chapter-name">Характеристика учащегося</h3>
         <div class="container">
@@ -184,7 +207,7 @@
                 <span class="label-text">Член актива ученического самоуправления(актив)</span>
             </div>
         </div>
-        <h3 class="chapter-name"">Группа здоровья</h3>
+        <h3 class="chapter-name">Группа здоровья</h3>
         <div class="container">
             <div class="left-side">
                 <div class="bordered-input">
@@ -202,13 +225,234 @@
         <h3 class="chapter-name">Занятость в кружках</h3>
         <div class="center-side">
             <div class="bordered-input">
-                {{ form.circles }}
+                {{ form.circle }}
                 <span class="label-text">Занимается в кружке</span>
             </div>
         </div>
         <div class="button-container">
-            <button class="save-button" type="submit" value="Сохранить">Сохранить</button>
+            <button class="save-button" name="form1-submit" type="submit" value="Сохранить">Сохранить</button>
         </div>
     </form>
+
+    <h3 class="section-name">Поощрения учащегося</h3>
+    <div class="table-container">
+        <table>
+          <tr>
+            <th>Дата</th>
+            <th>За какие достижения</th>
+            <th>Форма поощрения</th>
+          </tr>
+        {% for incentive in incentives %}
+          <tr>
+            <td>{{ incentive.date }}</td>
+            <td>{{ incentive.achievements }}</td>
+            <td>{{ incentive.form_of_incentives }}</td>
+          </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="center-side" style="margin: 0px 0 0 0;">
+                <div class="bordered-input">
+                    {{ incentivesform.date }}
+                    <span class="label-text">Дата</span>
+                </div>
+            </div>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ incentivesform.achievements }}
+                    <span class="label-text">За какие достижения</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ incentivesform.form_of_incentives }}
+                    <span class="label-text">Форма поощрения</span>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="save-button" name="form2-submit" type="submit" value="Создать запись">Создать запись</button>
+        </div>
+    </form>
+
+    <h3 class="section-name">Факты асоциального поведения учащегося</h3>
+    <div class="table-container">
+        <table>
+          <tr>
+            <th>Дата</th>
+            <th>Характер проявления</th>
+            <th>Меры</th>
+            <th>Результат</th>
+          </tr>
+        {% for antisocialbehavior in antisocialbehaviors %}
+          <tr>
+            <td>{{ antisocialbehavior.date }}</td>
+            <td>{{ antisocialbehavior.character }}</td>
+            <td>{{ antisocialbehavior.meri }}</td>
+            <td>{{ antisocialbehavior.result }}</td>
+          </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="center-side" style="margin: 0px 0 0 0;">
+                <div class="bordered-input">
+                    {{ antisocialbehaviorform.date }}
+                    <span class="label-text">Дата</span>
+                </div>
+            </div>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ antisocialbehaviorform.character }}
+                    <span class="label-text">Характер проявления</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ antisocialbehaviorform.meri }}
+                    <span class="label-text">Меры</span>
+                </div>
+            </div>
+        </div>
+        <div class="center-side">
+            <div class="bordered-input">
+                {{ antisocialbehaviorform.result }}
+                <span class="label-text">Результат</span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="save-button" name="form3-submit" type="submit" value="Создать запись">Создать запись</button>
+        </div>
+    </form>
+
+    <h3 class="section-name">Рекомендации специалистов</h3>
+    <div class="table-container">
+        <table>
+          <tr>
+            <th>Рекомендации педагога-психолога, педагога социального<br>(психологическая диагностика, консультирование)</th>
+            <th>Результат</th>
+          </tr>
+        {% for specialistrecommendation in specialistrecommendations %}
+          <tr>
+            <td>{{ specialistrecommendation.recomendations }}</td>
+            <td>{{ specialistrecommendation.result }}</td>
+          </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ specialistrecomendationform.recomendations }}
+                    <span class="label-text">Рекомендация</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ specialistrecomendationform.result }}
+                    <span class="label-text">Результат</span>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="save-button" name="form4-submit" type="submit" value="Создать запись">Создать запись</button>
+        </div>
+    </form>
+
+    <h3 class="section-name">Индивидуальная работа с учащимся</h3>
+    <div class="table-container">
+        <table>
+          <tr>
+            <th>Дата</th>
+            <th>Содержание работы</th>
+            <th>Результат</th>
+          </tr>
+        {% for individualwork in individualworks %}
+          <tr>
+            <td>{{ individualwork.date }}</td>
+            <td>{{ individualwork.content }}</td>
+            <td>{{ individualwork.result }}</td>
+          </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="center-side" style="margin: 0px 0 0 0;">
+                <div class="bordered-input">
+                    {{ individualworkform.date }}
+                    <span class="label-text">Дата</span>
+                </div>
+            </div>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ individualworkform.content }}
+                    <span class="label-text">Содержание работы</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ individualworkform.result }}
+                    <span class="label-text">Результат</span>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="save-button" name="form5-submit" type="submit" value="Создать запись">Создать запись</button>
+        </div>
+    </form>
+
+    <h3 class="section-name">Работа с родителями(другими законными представителями)</h3>
+    <div class="table-container">
+        <table>
+          <tr>
+            <th>Дата</th>
+            <th>Содержание работы</th>
+            <th>Результат</th>
+          </tr>
+        {% for workwithparent in workwithparents %}
+          <tr>
+            <td>{{ workwithparent.date }}</td>
+            <td>{{ workwithparent.content }}</td>
+            <td>{{ workwithparent.result }}</td>
+          </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="center-side" style="margin: 0px 0 0 0;">
+                <div class="bordered-input">
+                    {{ workwithparentsform.date }}
+                    <span class="label-text">Дата</span>
+                </div>
+            </div>
+        <div class="container">
+            <div class="left-side">
+                <div class="bordered-input">
+                    {{ workwithparentsform.content }}
+                    <span class="label-text">Содержание работы</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="bordered-input">
+                    {{ workwithparentsform.result }}
+                    <span class="label-text">Результат</span>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="save-button" name="form6-submit" type="submit" value="Создать запись">Создать запись</button>
+        </div>
+    </form>
+    </div>
 </body>
 </html>

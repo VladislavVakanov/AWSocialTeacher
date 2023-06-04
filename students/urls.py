@@ -1,17 +1,16 @@
-from django.conf import settings
-from django.template.context_processors import static
 from django.urls import path
 
-from students.views import (StudentListView, StudentDetailView, show_psychologist_page, show_social_teacher_page,
-                            show_all_students_from_group_page, show_all_students_for_curator)
+from students.views import (StudentListView, StudentDetailView, AllStudentsFromGroupListView,
+                            show_group_report, SocialTeacherListView, PsychologistListView)
 
 app_name = 'students'
 
 
 urlpatterns = [
-    path('', StudentListView.as_view(), name='show_students'),
-    path('psychologist/', show_psychologist_page, name='show_psychologist_page'),
-    path('socialteacher/', show_social_teacher_page, name='show_social_teacher_page'),
-    path('student/<str:last_name>/', StudentDetailView, name='show_info_about_student'),
-    path('student_list/group/<int:group>/', show_all_students_from_group_page, name='show_students_list_page'),
+    path('curator', StudentListView.as_view(), name='show_curator_page'),
+    path('psychologist/', PsychologistListView.as_view(), name='show_psychologist_page'),
+    path('social-teacher/', SocialTeacherListView.as_view(), name='show_social_teacher_page'),
+    path('group/<int:group>/', AllStudentsFromGroupListView.as_view(), name='show_students_list_page'),
+    path(f'group/<int:group>/<str:last_name>/', StudentDetailView, name='show_info_about_student'),
+    path('group/reports/<int:group>/', show_group_report, name='show_group_reports')
 ]

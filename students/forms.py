@@ -6,14 +6,14 @@ from students.cities import CITIES_FOR_FORM
 
 
 class StudentForm(forms.ModelForm):
-    OFF_BUDGET = 'Off-budget'
-    BUDGET = 'Budget'
-    FULL = 'Full'
-    NOT_FULL = 'Not full'
+    OFF_BUDGET = 'UNBUDGET'
+    BUDGET = 'BUDGET'
+    FULL = 'FULL'
+    NOT_FULL = 'NOTFULL'
     SEX_CHOICES = [
         ('', '---------'),
-        ('Male', 'Мужской'),
-        ('Female', 'Женский'),
+        ('MALE', 'Мужской'),
+        ('FEMALE', 'Женский'),
     ]
     TYPE_EDUCATION_CHOICE = [
         ('', '---------'),
@@ -41,7 +41,9 @@ class StudentForm(forms.ModelForm):
     }), required=False)
     dateBirth = forms.DateField(widget=forms.DateInput(attrs={
         'class': 'form-date-picker',
-        'placeholder': '00.00.0000'
+        'placeholder': '00.00.0000',
+        'pattern': '\d{2}\.\d{2}\.\d{4}',
+        'title': 'Введите дату рождения 00.00.0000'
     }), required=False)
     address = forms.ChoiceField(choices=CITIES_FOR_FORM, widget=forms.Select(attrs={
         'class': 'form-choice-field',
@@ -100,6 +102,17 @@ class StudentForm(forms.ModelForm):
     orphan_students = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
         'class': 'form-choice-field',
     }), required=False)
+
+    lica_iz_chisla_detei = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
+        'class': 'form-choice-field',
+    }), required=False)
+    deti = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
+        'class': 'form-choice-field',
+    }), required=False)
+    lica_iz_detei = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
+        'class': 'form-choice-field',
+    }), required=False)
+
     brsm = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
         'class': 'form-choice-field',
     }), required=False)
@@ -145,9 +158,9 @@ class StudentForm(forms.ModelForm):
         fields = ('last_name', 'first_name', 'otchestvo', 'image', 'dateBirth', 'address', 'sex', 'education_type',
                   'hostel', 'foreigner', 'type_of_family', 'family_large', 'guardianship', 'family_foster',
                   'low_income_family', 'refugees', 'settlers', 'family_students', 'have_children_students',
-                  'upo_students', 'ngz_students', 'sop', 'ipr', 'orphan_students', 'brsm', 'prof_souz',
-                  'self_government_student', 'invalid', 'oprf', 'circle', 'citizenship', 'health', 'hobbies',
-                  'conditions', 'other_info', 'place_living')
+                  'upo_students', 'ngz_students', 'sop', 'ipr', 'orphan_students', 'lica_iz_chisla_detei',
+                  'deti', 'lica_iz_detei', 'brsm', 'prof_souz', 'self_government_student', 'invalid', 'oprf', 'circle',
+                  'citizenship', 'health', 'hobbies', 'conditions', 'other_info', 'place_living')
 
 
 class AntisocialBehaviorForm(forms.ModelForm):

@@ -12,11 +12,15 @@ class User(AbstractUser):
         ('Педагог-психолог', 'Педагог-психолог')
     ]
     image = models.ImageField(upload_to='profile_images', blank=True)
-    role = models.CharField(max_length=128, choices=ROLE)
+    role = models.CharField(max_length=128, choices=ROLE, blank=False)
     group_number = models.OneToOneField(
         Group, db_column='group_number', db_constraint=False,
         on_delete=models.SET_NULL, null=True, blank=True, to_field='group_number', unique=True
     )
 
     def __str__(self):
-        return f'{self.username}({self.last_name} {self.first_name})'
+        return f'{self.username}'
+
+    class Meta:
+        verbose_name = f"работника колледжа"
+        verbose_name_plural = "Работники колледжа"

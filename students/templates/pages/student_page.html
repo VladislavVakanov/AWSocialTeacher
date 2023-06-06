@@ -68,10 +68,6 @@
                     {{ form.address }}
                     <span class="label-text">Город</span>
                 </div>
-                <div class="bordered-input">
-                    {{ form.hostel }}
-                    <span class="label-text">Общежитие</span>
-                </div>
             </div>
             <div class="right-side">
                 <div class="bordered-input">
@@ -94,12 +90,18 @@
                     {{ form.education_type }}
                     <span class="label-text">Тип обучения</span>
                 </div>
-                <div class="bordered-input">
-                    {{ form.foreigner }}
-                    <span class="label-text">Иностранные граждане, вид на жительство</span>
-                </div>
+<!--                <div class="bordered-input">-->
+<!--                    {{ form.foreigner }}-->
+<!--                    <span class="label-text">Иностранные граждане, вид на жительство</span>-->
+<!--                </div>-->
             </div>
         </div>
+        <div class="center-side">
+                <div class="bordered-input">
+                    {{ form.hostel }}
+                    <span class="label-text">Общежитие</span>
+                </div>
+            </div>
         <div class="container">
             <div class="left-side">
                 <div class="bordered-input">
@@ -140,7 +142,7 @@
                     <span class="label-text">Многодетная</span>
                 </div>
                 <div class="bordered-input">
-                    {{ form.family_large }}
+                    {{ form.family_foster }}
                     <span class="label-text">Приемная</span>
                 </div>
                 <div class="bordered-input">
@@ -174,6 +176,10 @@
                     {{ form.orphan_students }}
                     <span class="label-text">Сирота</span>
                 </div>
+                <div class="bordered-input">
+                    {{ form.deti }}
+                    <span class="label-text">Остался(ась) без попечения родителей</span>
+                </div>
             </div>
             <div class="right-side">
                 <div class="bordered-input">
@@ -183,6 +189,14 @@
                 <div class="bordered-input">
                     {{ form.ipr }}
                     <span class="label-text">ИПР</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.lica_iz_chisla_detei }}
+                    <span class="label-text">Лицо из числа детей-сирот</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.lica_iz_detei }}
+                    <span class="label-text">Лицо из числа детей, оставшихся без попечения родителей</span>
                 </div>
             </div>
         </div>
@@ -277,7 +291,7 @@
             <button class="save-button" name="form2-submit" type="submit" value="Создать запись">Создать запись</button>
         </div>
     </form>
-
+    {% if user.role != "Куратор" %}
     <h3 class="section-name">Факты асоциального поведения учащегося</h3>
     <div class="table-container">
         <table>
@@ -329,7 +343,8 @@
             <button class="save-button" name="form3-submit" type="submit" value="Создать запись">Создать запись</button>
         </div>
     </form>
-
+    {% endif %}
+    {% if user.role != "Куратор" %}
     <h3 class="section-name">Рекомендации специалистов</h3>
     <div class="table-container">
         <table>
@@ -365,7 +380,7 @@
             <button class="save-button" name="form4-submit" type="submit" value="Создать запись">Создать запись</button>
         </div>
     </form>
-
+    {% endif %}
     <h3 class="section-name">Индивидуальная работа с учащимся</h3>
     <div class="table-container">
         <table>

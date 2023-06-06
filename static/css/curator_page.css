@@ -125,3 +125,27 @@
     justify-content: center;
     outline: none;
   }
+  .report-button {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 1.5rem;
+    background-color: #F2F3F4;
+    color: #47BDFF;
+    font-weight: 1000;
+    width: 500px;
+    height: 40px;
+    justify-content: center;
+    outline: none;
+  }
+
+  .report-button:hover {
+    background-color: #EBF5FB;
+  }
+
+  .button-container {
+    margin-top: 7px;
+    display: flex;
+    justify-content: center;
+  }

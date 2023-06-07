@@ -6,9 +6,10 @@
     <meta charset="UTF-8">
     <title>AWST</title>
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
-<form class="login-form" method="POST">
+<form class="login-form" id='login-form' method="POST">
     <h3>AWST</h3>
     <br>
     {% csrf_token %}
@@ -17,10 +18,19 @@
         <span class="label-text">Логин</span>
     </div>
     <div class="bordered-input">
+        <div class="input-wrapper">
         {{ form.password }}
+        <button id="show-password" class="show-password" type="button">&#128065;</button>
+        </div>
         <span class="label-text">Пароль</span>
+
     </div>
-    <button type="submit">ВОЙТИ</button>
+    {% if messages %}
+            {% for message in messages %}
+                <span class="error">{{ message }}</span>
+            {% endfor %}
+    {% endif %}
+    <button class="entrance" type="submit">ВОЙТИ</button>
 </form>
 </body>
 </html>

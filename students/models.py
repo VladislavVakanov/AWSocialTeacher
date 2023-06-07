@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from students.cities import CITIES
+from simple_history.models import HistoricalRecords
 
 
 class Group(models.Model):
@@ -25,7 +25,7 @@ class AntisocialBehavior(models.Model):
     result = models.TextField(null=False, blank=False, verbose_name='Результат')
 
     def __str__(self):
-        return f'{self.date} | {self.character} | {self.meri} | {self.result}'
+        return f'Дата: {self.date}\n Характер проявления:{self.character} | Меры: {self.meri} | Результат: {self.result}'
 
     class Meta:
         verbose_name = "Асоциальное поведение"
@@ -36,7 +36,7 @@ class SpecialistRecomendations(models.Model):
     recomendations = models.TextField(null=False, blank=False, verbose_name='Рекомендации')
     result = models.TextField(null=False, blank=False, verbose_name='Результат')
     def __str__(self):
-        return f'{self.recomendations} | {self.result}'
+        return f'Рекомендации: {self.recomendations} | Результат: {self.result}'
 
     class Meta:
         verbose_name = "Рекомендация специалиста"
@@ -48,7 +48,7 @@ class Incentives(models.Model):
     achievements = models.TextField(null=False, blank=False, verbose_name='За какие достижения')
     form_of_incentives = models.TextField(null=False, blank=False, verbose_name='Форма поощрения')
     def __str__(self):
-        return f'{self.date} | {self.achievements} | {self.form_of_incentives}'
+        return f'Дата: {self.date} | За какие достижения: {self.achievements} | Форма поощрения: {self.form_of_incentives}'
 
     class Meta:
         verbose_name = "Поощрение учащегося"
@@ -60,7 +60,7 @@ class IndividualWork(models.Model):
     content = models.TextField(null=False, blank=False, verbose_name='Содержание работы')
     result = models.TextField(null=False, blank=False, verbose_name='Результат')
     def __str__(self):
-        return f'{self.date} | {self.content} | {self.result}'
+        return f'Дата: {self.date} | Содержание работы: {self.content} | Результат: {self.result}'
     class Meta:
         verbose_name = f"Индивидуальная работа с учащимся"
         verbose_name_plural = "Индивидуальная работа с учащимися"
@@ -71,11 +71,14 @@ class WorkWithParents(models.Model):
     content = models.TextField(null=False, blank=False, verbose_name='Содержание работы')
     result = models.TextField(null=False, blank=False, verbose_name='Результат')
     def __str__(self):
-        return f'{self.date} | {self.content} | {self.result}'
+        return f'Дата: {self.date} | Содержание работы: {self.content} | Результат: {self.result}'
 
     class Meta:
         verbose_name = f"Работа с родителями учащегося"
         verbose_name_plural = "Работа с родителями учащихся"
+
+
+
 
 
 class Student(models.Model):
@@ -95,18 +98,23 @@ class Student(models.Model):
         ('FULL', 'Полная'),
         ('NOTFULL', 'Неполная'),
     ]
+    TYPE_OF_STUDENT = [
+        ('STAROSTA', 'Староста'),
+        ('ZAMSTAROSTA', 'Заместитель старосты'),
+        ('STUDENT', 'Учащийся(ася)'),
+    ]
     group_number = models.ForeignKey(
         Group, on_delete=models.CASCADE, db_column='group_number', db_constraint=False, to_field='group_number', verbose_name='Группа')
-    first_name = models.CharField(max_length=128, verbose_name='Имя')
     last_name = models.CharField(max_length=128, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=128, verbose_name='Имя')
     otchestvo = models.CharField(max_length=128, verbose_name='Отчество')
-    image = models.ImageField(upload_to='student_images', blank=True)
-    dateBirth = models.DateField(blank=True, default='00.00.0000')
-    address = models.CharField(max_length=128,choices=CITIES, null=False, blank=True, default='')
-    sex = models.CharField(max_length=16, null=False, choices=SEX_CHOICES, blank=True, default='')
-    education_type = models.CharField(max_length=16, null=False, choices=TYPE_EDUCATION_CHOICE, blank=True, default='')
-    hostel = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
-    foreigner = models.CharField(max_length=16, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
+    image = models.ImageField(upload_to='student_images', blank=True, verbose_name='Фотография')
+    dateBirth = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
+    phoneNumber = models.CharField(max_length=128, null=False, blank=True, default='Номер телефона')
+    sex = models.CharField(max_length=16, null=False, choices=SEX_CHOICES, blank=True, default='Пол')
+    education_type = models.CharField(max_length=16, null=False, choices=TYPE_EDUCATION_CHOICE, blank=True, default='Тип обучения')
+    hostel = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='Проживает в общежитие')
+    status = models.CharField(max_length=16, null=False, choices=TYPE_OF_STUDENT, blank=True, default='')
     type_of_family = models.CharField(max_length=16, null=False, choices=TYPE_OF_FAMILY_CHOICES, blank=True, default='')
     family_large = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
     guardianship = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
@@ -130,9 +138,9 @@ class Student(models.Model):
     invalid = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
     oprf = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
     circle = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
+    incentives = models.ManyToManyField(Incentives, blank=True)
     antisocial_behavior = models.ManyToManyField(AntisocialBehavior, blank=True)
     specialist_recommendations = models.ManyToManyField(SpecialistRecomendations, blank=True)
-    incentives = models.ManyToManyField(Incentives, blank=True)
     individualwork = models.ManyToManyField(IndividualWork, blank=True)
     workwithparents = models.ManyToManyField(WorkWithParents,blank=True)
     citizenship = models.CharField(max_length=32, blank=True, default='')
@@ -141,13 +149,14 @@ class Student(models.Model):
     conditions = models.TextField(null=False, blank=True, default='')
     other_info = models.TextField(null=False, blank=True, default='')
     place_living = models.CharField(max_length=128, null=False, blank=True, default='')
+    history = HistoricalRecords()
 
     def get_url(self):
         return reverse('students:show_info_about_student', args=[self.group_number,self.last_name])
 
     def __str__(self):
-        return f'{self.last_name} {self.first_name} {self.otchestvo}'
+        return f'{self.last_name} | {self.first_name} | {self.otchestvo}'
 
     class Meta:
-        verbose_name = f"Учащийся"
+        verbose_name = f"учащегося"
         verbose_name_plural = "Учащиеся"

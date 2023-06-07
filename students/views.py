@@ -1,10 +1,12 @@
 from datetime import date, timedelta
 from io import BytesIO
 
+import openpyxl
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Q
-from django.http import FileResponse, HttpResponse
-from django.shortcuts import get_object_or_404
+from django.http import FileResponse
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
@@ -12,15 +14,10 @@ from docx import Document
 from docx.enum.section import WD_SECTION
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Pt
+
 from students.forms import (StudentForm, AntisocialBehaviorForm, IncentivesForm,
                             IndividualWorkForm, WorkWithParentsForm, SpecialistRecomendationsForm)
 from students.models import Student, Group
-import openpyxl
-from openpyxl.utils import get_column_letter
-from openpyxl.drawing.image import Image
-from openpyxl.utils.dataframe import dataframe_to_rows
-from django.http import HttpResponse
-from django.shortcuts import render
 
 
 def is_curator(user):
@@ -42,7 +39,6 @@ class StudentListView(ListView):
     ordering = ['last_name']
 
     def get_queryset(self):
-        print(self.request.user.groups.all()[0])
         return super().get_queryset().filter(group_number=self.request.user.group_number)
 
     def get_context_data(self, **kwargs):
@@ -105,8 +101,6 @@ def StudentDetailView(request, last_name, group):
                 antisocial_instance = form3.save(commit=False)
                 antisocial_instance.save()
                 student.antisocial_behavior.add(antisocial_instance)
-            else:
-                print(form3.errors)
         elif 'form4-submit' in request.POST:
             form4 = SpecialistRecomendationsForm(request.POST)
             if form4.is_valid():
@@ -193,9 +187,9 @@ def show_group_report(request, group):
         Student.objects.filter(Q(sex='FEMALE'), Q(group_number=group)).count(),
         minor_students_count.count(),
         Student.objects.filter(Q(dateBirth__lte=eighteen_year_ago), Q(group_number=group)).count(),
-        Student.objects.filter(Q(group_number=group)).exclude(Q(address='Минск') |
-                                                              Q(address='') |
-                                                              Q(address__isnull=True)).count(),
+        Student.objects.filter(Q(group_number=group)).exclude(Q(place_living__contains='Минск') |
+                                                              Q(place_living='') |
+                                                              Q(place_living__isnull=True)).count(),
         Student.objects.filter(Q(hostel='YES'), Q(group_number=group)).count(),
         Student.objects.filter(Q(group_number=group)).exclude(Q(citizenship='Республика Беларусь')).count(),
         Student.objects.filter(Q(type_of_family='FULL'), Q(group_number=group)).count(),
@@ -395,11 +389,9 @@ def show_group_report(request, group):
                 adjusted_width = (max_length + 2)
                 sheet.column_dimensions[column].width = adjusted_width
 
-            # Создание HTTP-ответа с файлом Excel
             response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
             response['Content-Disposition'] = f'attachment; filename=Отчет по группе №{group}.xlsx'
 
-            # Сохранение документа Excel в HTTP-ответ
             workbook.save(response)
 
             return response
@@ -410,3 +402,14 @@ def show_group_report(request, group):
         'report_data': table_data
     }
     return render(request, 'pages/group_report_page.html', context=context)
+
+from django.shortcuts import redirect
+
+from django.shortcuts import redirect
+
+def return_to_previous_page(request):
+    # Получите предыдущий URL из HTTP-заголовка Referer
+    previous_page = request.META.get('HTTP_REFERER')
+
+    # Перенаправьте пользователя на предыдущую страницу
+    return redirect(previous_page)

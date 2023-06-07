@@ -1,8 +1,9 @@
 from django import forms
+from django.core.validators import RegexValidator
 
+from students.cities import COUNTRIES
 from students.models import (Student, AntisocialBehavior, SpecialistRecomendations,
                              Incentives, IndividualWork, WorkWithParents)
-from students.cities import CITIES_FOR_FORM
 
 
 class StudentForm(forms.ModelForm):
@@ -30,6 +31,12 @@ class StudentForm(forms.ModelForm):
         (FULL, 'Полная'),
         (NOT_FULL, 'Неполная'),
     ]
+    TYPE_OF_STUDENT = [
+        ('', '---------'),
+        ('STAROSTA', 'Староста'),
+        ('ZAMSTAROSTA', 'Заместитель старосты'),
+        ('STUDENT', 'Учащийся(ася)'),
+    ]
     last_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-input'
     }), required=False)
@@ -41,12 +48,13 @@ class StudentForm(forms.ModelForm):
     }), required=False)
     dateBirth = forms.DateField(widget=forms.DateInput(attrs={
         'class': 'form-date-picker',
-        'placeholder': '00.00.0000',
+        'placeholder': 'ДД.ММ.ГГГГ',
         'pattern': '\d{2}\.\d{2}\.\d{4}',
         'title': 'Введите дату рождения 00.00.0000'
     }), required=False)
-    address = forms.ChoiceField(choices=CITIES_FOR_FORM, widget=forms.Select(attrs={
-        'class': 'form-choice-field',
+    phoneNumber = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-input',
+        'placeholder': '+375 XX XXX-XX-XX',
     }), required=False)
     sex = forms.ChoiceField(choices=SEX_CHOICES, widget=forms.Select(attrs={
         'class': 'form-choice-field'
@@ -57,7 +65,7 @@ class StudentForm(forms.ModelForm):
     hostel = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
         'class': 'form-choice-field'
     }), required=False)
-    foreigner = forms.ChoiceField(choices=SUBMIT_CHOICES, widget=forms.Select(attrs={
+    status = forms.ChoiceField(choices=TYPE_OF_STUDENT, widget=forms.Select(attrs={
         'class': 'form-choice-field'
     }), required=False)
     type_of_family = forms.ChoiceField(choices=TYPE_OF_FAMILY_CHOICES, widget=forms.Select(attrs={
@@ -134,8 +142,8 @@ class StudentForm(forms.ModelForm):
     image = forms.ImageField(widget=forms.FileInput(attrs={
         'class': 'form-image-input'
     }), required=False)
-    citizenship = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-input'
+    citizenship = forms.ChoiceField(choices=COUNTRIES, widget=forms.Select(attrs={
+        'class': 'form-choice-field'
     }), required=False)
     health = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-text-area'
@@ -155,8 +163,8 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ('last_name', 'first_name', 'otchestvo', 'image', 'dateBirth', 'address', 'sex', 'education_type',
-                  'hostel', 'foreigner', 'type_of_family', 'family_large', 'guardianship', 'family_foster',
+        fields = ('last_name', 'first_name', 'otchestvo', 'image', 'dateBirth', 'phoneNumber', 'sex', 'education_type',
+                  'hostel', 'status', 'type_of_family', 'family_large', 'guardianship', 'family_foster',
                   'low_income_family', 'refugees', 'settlers', 'family_students', 'have_children_students',
                   'upo_students', 'ngz_students', 'sop', 'ipr', 'orphan_students', 'lica_iz_chisla_detei',
                   'deti', 'lica_iz_detei', 'brsm', 'prof_souz', 'self_government_student', 'invalid', 'oprf', 'circle',

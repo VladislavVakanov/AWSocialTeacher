@@ -4,8 +4,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ student.last_name }}</title>
+    <title>AWST</title>
     <link rel="stylesheet" href="{% static 'css/student_list_page_style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
     <header>
@@ -19,7 +20,7 @@
             {% endif %}
         </div>
         <div class="page-name">
-            <span style="color: #000; margin-right: 50px; font-size: 19px;">Социальный паспорт учащегося</span>
+            <span style="color: #000; margin-right: 50px; font-size: 19px;"></span>
         </div>
         <div class="navbar-container">
             <nav class="navbar">
@@ -34,7 +35,13 @@
         </div>
     </header>
     <div class="content">
-    <form method="POST" enctype="multipart/form-data">
+    <div class="c">
+        <button class="back-button" onclick="goBack()">&#8592;</button>
+    </div>
+    <div class="photo-container">
+        <h3 class="photo">Социальный паспорт учащегося</h3>
+    </div>
+    <form method="POST" onsubmit="return validatePhoneNumber()" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="image-wrapper">
             <div class= "icon">
@@ -65,9 +72,14 @@
                     <span class="label-text">Гражданство</span>
                 </div>
                 <div class="bordered-input">
-                    {{ form.address }}
-                    <span class="label-text">Город</span>
+                    {{ form.phoneNumber }}
+                    <span class="label-text">Номер телефона</span>
+                    <span id="phone-error" class="error-message"></span>
                 </div>
+                <div class="bordered-input">
+                    {{ form.status }}
+                    <span class="label-text">Статус</span>
+                </div>s
             </div>
             <div class="right-side">
                 <div class="bordered-input">
@@ -79,29 +91,23 @@
                     <span class="label-text">Группа</span>
                 </div>
                 <div class="bordered-input">
-                    {{ form.place_living }}
-                    <span class="label-text">Место проживания в период обучения</span>
-                </div>
-                <div class="bordered-input">
                     {{ form.sex }}
                     <span class="label-text">Пол</span>
+                </div>
+                <div class="bordered-input">
+                    {{ form.place_living }}
+                    <span class="label-text">Адрес</span>
                 </div>
                 <div class="bordered-input">
                     {{ form.education_type }}
                     <span class="label-text">Тип обучения</span>
                 </div>
-<!--                <div class="bordered-input">-->
-<!--                    {{ form.foreigner }}-->
-<!--                    <span class="label-text">Иностранные граждане, вид на жительство</span>-->
-<!--                </div>-->
-            </div>
-        </div>
-        <div class="center-side">
                 <div class="bordered-input">
                     {{ form.hostel }}
                     <span class="label-text">Общежитие</span>
                 </div>
             </div>
+        </div>
         <div class="container">
             <div class="left-side">
                 <div class="bordered-input">

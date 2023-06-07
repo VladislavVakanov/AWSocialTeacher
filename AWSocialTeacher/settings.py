@@ -31,7 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'user',
-    'students'
+    'students',
+    'simple_history',
 ]
 
 MIDDLEWARE = [
@@ -42,7 +43,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'AWSocialTeacher.urls'
@@ -137,6 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Users
 
 AUTH_USER_MODEL = 'user.User'
+HISTORY_USER_MODEL = 'user.User'
 
 LOGOUT_REDIRECT_URL = '/'
 

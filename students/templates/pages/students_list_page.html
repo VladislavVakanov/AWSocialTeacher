@@ -1,11 +1,11 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>AWST</title>
     <link rel="stylesheet" href="{% static 'css/all_students_from_group.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
     <div class="content">
@@ -32,13 +32,16 @@
                 </nav>
             </div>
         </header>
+        <div class="c">
+            <button class="back-button" onclick="goBack()">&#8592;</button>
+        </div>
         <div class="sidebar">
             <p>Группа: {{ group }}</p>
         </div>
         <div class="container">
             {% for student in students %}
                 <a class="button" href="{{ student.get_url }}">
-                    <p class="name">{{ student.last_name }} {{ student.first_name }} {{ student.otchestvo }}</p>
+                    <p class="name">{{ student.last_name }} {{ student.first_name }} {{ student.otchestvo }} {% if student.status == "STAROSTA"%}(Староста){% elif student.status == "ZAMSTAROSTA" %}(Заместитель старосты){% endif %}</p>
                 </a>
             {% endfor %}
         </div>

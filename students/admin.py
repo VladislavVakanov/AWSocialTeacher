@@ -1,33 +1,40 @@
+import csv
+
 from django.contrib import admin
 from django.db.models import QuerySet
+from django.http import HttpResponse
+from django.urls import path, reverse
 from django.utils.safestring import mark_safe
 
 from students.models import (Student, Group, Incentives, SpecialistRecomendations,
                              WorkWithParents, AntisocialBehavior, IndividualWork)
-from user.models import User
-
 
 
 class AllStudents(admin.TabularInline):
     model = Student
     extra = 1
 
-class AllIncentives(admin.TabularInline):
+class AllIncentives(admin.StackedInline):
     model = Student.incentives.through
-    extra = 1
+    extra = 0
+    readonly_fields = ['incentives']
+    verbose_name_plural = 'Поощрения'
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
     def __str__(self):
-        return f'{self.model._meta.verbose_name}'
+        return 'Custom Label'
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ['group_number', 'get_html_photo', 'last_name', 'first_name', 'otchestvo']
     list_display_links = ['last_name']
-    list_editable = ['first_name', 'otchestvo', 'group_number']
-    readonly_fields = ['get_html_photo']
+    list_editable = ['group_number']
     ordering = ['group_number', 'last_name', 'first_name']
-    exclude = []
+    exclude = ['incentives', 'antisocial_behavior', 'specialist_recommendations', 'individualwork', 'workwithparents']
     list_per_page = 30
-    actions = ['set_group']
+    actions = ['set_group', 'import_csv']
     search_fields = ['group_number__group_number' ,'last_name', 'first_name', 'otchestvo']
     list_filter = ['group_number']
     inlines = [AllIncentives]
@@ -41,6 +48,7 @@ class StudentAdmin(admin.ModelAdmin):
     def get_html_photo(self, object):
         if object.image:
             return mark_safe(f"<img src='{object.image.url}' width=100px>")
+
 
     get_html_photo.short_description = 'Фотография'
 

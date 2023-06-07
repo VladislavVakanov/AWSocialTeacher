@@ -6,6 +6,7 @@
       <meta charset="UTF-8">
       <title>AWST</title>
       <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+      <script src="{% static 'js/script.js' %}"></script>
   </head>
   <body>
     <div class="content">
@@ -34,11 +35,14 @@
                 </nav>
             </div>
         </header>
+
         <div class="forms-container">
+            <div class="c">
+                <button class="back-button" onclick="goBack()">&#8592;</button>
+            </div>
             <form class="profile-form" action="{% url 'user:profile' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form">
-
                     <div class="image-wrapper">
                         <div class="icon">
                             <img class="image" src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'files/no-photo.png' %} {% endif %}">
@@ -93,11 +97,25 @@
                     <button class="save-button" type="submit" value="Сохранить">Сохранить</button>
                 </div>
             </form>
-<!--            <form class="history-form">-->
-<!--                <div class="title">-->
-<!--                    <h3>История</h3>-->
-<!--                </div>-->
-<!--            </form>-->
+            <div class="history-container">
+                <div class="container-name">
+                    <h4>История изменений</h4>
+                </div>
+                <div class="links-container">
+                    <div class="student-name">
+                        <p class="date">Дата</p>
+                        <p class="date">Фамилия</p>
+                        <p class="date">Имя</p>
+                    </div>
+                    {% for history in histories %}
+                    <a class="student-link" href="{% url 'students:show_info_about_student' group=history.group_number last_name=history.last_name %}">
+                        <p class="date">{{ history.history_date }}</p>
+                        <p class="date">{{ history.last_name }}</p>
+                        <p class="date">{{ history.first_name }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
   </body>

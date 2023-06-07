@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from students.models import Group
 
 
 class User(AbstractUser):
@@ -11,10 +10,10 @@ class User(AbstractUser):
         ('Социальный педагог', 'Социальный педагог'),
         ('Педагог-психолог', 'Педагог-психолог')
     ]
-    image = models.ImageField(upload_to='profile_images', blank=True)
+    image = models.ImageField(upload_to='profile_images', blank=True, default='static/files/no-photo.png')
     role = models.CharField(max_length=128, choices=ROLE, blank=False)
     group_number = models.OneToOneField(
-        Group, db_column='group_number', db_constraint=False,
+        'students.Group', db_column='group_number', db_constraint=False,
         on_delete=models.SET_NULL, null=True, blank=True, to_field='group_number', unique=True
     )
 

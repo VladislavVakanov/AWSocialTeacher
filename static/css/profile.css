@@ -79,6 +79,24 @@
     font-weight: 500;
     font-size: 16px;
     color: #F2F3F4;
+    display:flex;
+    justify-content: center;
+    margin: 0 0 30px 0;
+  }
+
+  .nav-page-name {
+
+    font-weight: 500;
+    font-size: 18px;
+    color: green;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px;
+    margin: 0px 30px 0 0px;
+    background-color: #F2F3F4;
+  }
+
+  .nav-page-name:hover {
+    background-color: #F2F3F4;
   }
 
   .forms-container {
@@ -297,7 +315,6 @@
     border-radius: 10px;
   }
 
-
   .student-link:hover {
     background-color: white;
   }
@@ -318,16 +335,22 @@
   border-radius: 4px;
   cursor: pointer;
   margin-left: 20px;
-}
+  }
 
-.back-button:hover {
-  background-color: white;
-}
+  .back-button:hover {
+    background-color: white;
+  }
 
-.back-button:active {
-  background-color: white;
-}
+  .back-button:active {
+    background-color: white;
+  }
 
-.c {
-  display: flex;
-   }
+  .c {
+    display: flex;
+  }
+
+  .nav-name {
+    font-weight: 1000;
+    font-size: 18px;
+    padding: 0px 45px 0px 0px;
+  }

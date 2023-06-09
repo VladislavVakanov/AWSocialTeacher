@@ -11,7 +11,7 @@ class Group(models.Model):
         return reverse('students:show_students_list_page', args=[self.group_number])
 
     class Meta:
-        verbose_name = "Учебная группа"
+        verbose_name = "учебную группу"
         verbose_name_plural = "Учебные группы"
 
 
@@ -28,7 +28,7 @@ class AntisocialBehavior(models.Model):
         return f'Дата: {self.date}\n Характер проявления:{self.character} | Меры: {self.meri} | Результат: {self.result}'
 
     class Meta:
-        verbose_name = "Асоциальное поведение"
+        verbose_name = "асоциальное поведение"
         verbose_name_plural = "Асоциальное поведения"
 
 
@@ -39,7 +39,7 @@ class SpecialistRecomendations(models.Model):
         return f'Рекомендации: {self.recomendations} | Результат: {self.result}'
 
     class Meta:
-        verbose_name = "Рекомендация специалиста"
+        verbose_name = "рекомендацию специалиста"
         verbose_name_plural = "Рекомендации специалистов"
 
 
@@ -51,7 +51,7 @@ class Incentives(models.Model):
         return f'Дата: {self.date} | За какие достижения: {self.achievements} | Форма поощрения: {self.form_of_incentives}'
 
     class Meta:
-        verbose_name = "Поощрение учащегося"
+        verbose_name = "поощрение учащегося"
         verbose_name_plural = "Поощрения учащихся"
 
 
@@ -62,7 +62,7 @@ class IndividualWork(models.Model):
     def __str__(self):
         return f'Дата: {self.date} | Содержание работы: {self.content} | Результат: {self.result}'
     class Meta:
-        verbose_name = f"Индивидуальная работа с учащимся"
+        verbose_name = f"индивидуальнуя работу с учащимся"
         verbose_name_plural = "Индивидуальная работа с учащимися"
 
 
@@ -74,7 +74,7 @@ class WorkWithParents(models.Model):
         return f'Дата: {self.date} | Содержание работы: {self.content} | Результат: {self.result}'
 
     class Meta:
-        verbose_name = f"Работа с родителями учащегося"
+        verbose_name = f"работу с родителями учащегося"
         verbose_name_plural = "Работа с родителями учащихся"
 
 
@@ -110,13 +110,13 @@ class Student(models.Model):
     otchestvo = models.CharField(max_length=128, verbose_name='Отчество')
     image = models.ImageField(upload_to='student_images', blank=True, verbose_name='Фотография')
     dateBirth = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
-    phoneNumber = models.CharField(max_length=128, null=False, blank=True, default='Номер телефона')
-    sex = models.CharField(max_length=16, null=False, choices=SEX_CHOICES, blank=True, default='Пол')
-    education_type = models.CharField(max_length=16, null=False, choices=TYPE_EDUCATION_CHOICE, blank=True, default='Тип обучения')
-    hostel = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='Проживает в общежитие')
-    status = models.CharField(max_length=16, null=False, choices=TYPE_OF_STUDENT, blank=True, default='')
-    type_of_family = models.CharField(max_length=16, null=False, choices=TYPE_OF_FAMILY_CHOICES, blank=True, default='')
-    family_large = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
+    phoneNumber = models.CharField(max_length=128, null=False, blank=True, verbose_name='Номер телефона', default='')
+    sex = models.CharField(max_length=16, null=False, choices=SEX_CHOICES, blank=True, verbose_name='Пол', default='')
+    education_type = models.CharField(max_length=16, null=False, choices=TYPE_EDUCATION_CHOICE, blank=True, verbose_name='Тип обучения', default='')
+    hostel = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, verbose_name='Проживает в общежитие')
+    status = models.CharField(max_length=16, null=False, choices=TYPE_OF_STUDENT, blank=True, verbose_name='Статус в группе', default='')
+    type_of_family = models.CharField(max_length=16, null=False, choices=TYPE_OF_FAMILY_CHOICES, blank=True, verbose_name='Тип семьи', default='')
+    family_large = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True,default='')
     guardianship = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
     family_foster = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')
     low_income_family = models.CharField(max_length=3, null=False, choices=SUBMIT_CHOICES, blank=True, default='')

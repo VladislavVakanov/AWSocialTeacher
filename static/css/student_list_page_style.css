@@ -360,3 +360,9 @@
 .photo {
   font-size: 20px;
 }
+
+.nav-name {
+    font-weight: 1000;
+    font-size: 18px;
+    padding: 0px 45px 0px 0px;
+  }

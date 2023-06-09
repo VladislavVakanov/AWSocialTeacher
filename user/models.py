@@ -10,11 +10,11 @@ class User(AbstractUser):
         ('Социальный педагог', 'Социальный педагог'),
         ('Педагог-психолог', 'Педагог-психолог')
     ]
-    image = models.ImageField(upload_to='profile_images', blank=True, default='static/files/no-photo.png')
+    image = models.ImageField(upload_to='profile_images', blank=True)
     role = models.CharField(max_length=128, choices=ROLE, blank=False)
     group_number = models.OneToOneField(
         'students.Group', db_column='group_number', db_constraint=False,
-        on_delete=models.SET_NULL, null=True, blank=True, to_field='group_number', unique=True
+        on_delete=models.SET_NULL, null=True, blank=True, to_field='group_number', unique=True, verbose_name='Номер группы'
     )
 
     def __str__(self):

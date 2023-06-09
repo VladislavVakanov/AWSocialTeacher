@@ -13,5 +13,4 @@ urlpatterns = [
     path('group/<int:group>/', AllStudentsFromGroupListView.as_view(), name='show_students_list_page'),
     path(f'group/<int:group>/<str:last_name>/', StudentDetailView, name='show_info_about_student'),
     path('group/reports/<int:group>/', show_group_report, name='show_group_reports'),
-    path('return/', return_to_previous_page, name="return")
 ]

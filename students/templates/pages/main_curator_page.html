@@ -11,6 +11,7 @@
             <div class="rectangle">
                 <a href="{% url 'students:show_curator_page'%}" class="logo">AWST</a>
             </div>
+            <span class="nav-name">Список учащихся</span>
             <div class="navbar-container">
                 <nav class="navbar">
                     <ul>
@@ -24,9 +25,16 @@
             </div>
         </header>
         <div class="content">
+            {% if group.group_number %}
             <div class="sidebar">
-                <p>Группа: {{ group.group_number }}</p>
+                <p>Группа:{{ group.group_number }}</p>
             </div>
+            {% endif %}
+            {% if not group.group_number %}
+            <div class="description">
+                <h2>Вы не привязаны к группе с учащимися, пожалуйста, обратитесь к администратору. Он сможет помочь вам в этом вопросе и обеспечить вас доступом к соответствующим функциональным возможностям.</h2>
+            </div>
+            {% endif %}
             <div class="container">
                 {% for student in students %}
                     <a class="button" href="{{ student.get_url }}">
@@ -34,11 +42,13 @@
                     </a>
                 {% endfor %}
             </div>
+            {% if group.group_number %}
             <div class="container">
                 <a class="report-button" href="{% url 'students:show_group_reports' group=group %}">
                     <p class="name">Посмотреть отчеты</p>
                 </a>
             </div>
+            {% endif %}
         </div>
   </body>
 </html>

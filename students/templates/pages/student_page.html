@@ -19,9 +19,7 @@
                 <a href="{% url 'students:show_psychologist_page' %}" class="logo">AWST</a>
             {% endif %}
         </div>
-        <div class="page-name">
-            <span style="color: #000; margin-right: 50px; font-size: 19px;"></span>
-        </div>
+        <span class="nav-name">Социальный паспорт учащегося</span>
         <div class="navbar-container">
             <nav class="navbar">
                 <ul>
@@ -35,12 +33,6 @@
         </div>
     </header>
     <div class="content">
-    <div class="c">
-        <button class="back-button" onclick="goBack()">&#8592;</button>
-    </div>
-    <div class="photo-container">
-        <h3 class="photo">Социальный паспорт учащегося</h3>
-    </div>
     <form method="POST" onsubmit="return validatePhoneNumber()" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="image-wrapper">
@@ -79,7 +71,7 @@
                 <div class="bordered-input">
                     {{ form.status }}
                     <span class="label-text">Статус</span>
-                </div>s
+                </div>
             </div>
             <div class="right-side">
                 <div class="bordered-input">
@@ -120,6 +112,12 @@
                     {{ form.hobbies }}
                     <span class="label-text">Увлечения</span>
                 </div>
+            </div>
+        </div>
+        <div class="center-side">
+            <div class="bordered-input">
+                {{ form.other_info }}
+                <span class="label-text">Другие сведения</span>
             </div>
         </div>
         <h3 class="chapter-name">Характеристика семьи</h3>

@@ -66,3 +66,7 @@ class ProfileView():
 
         }
         return render(request, 'pages/profile_page.html', context)
+
+
+def show_spravka_page(request):
+    return render(request, 'pages/spravka.html')

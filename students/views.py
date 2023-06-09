@@ -65,19 +65,6 @@ class PsychologistListView(ListView):
     ordering = 'group_number'
 
 
-# @method_decorator(login_required, name='dispatch')
-# class StudentDetailView(DetailView):
-#     model = Student
-#     template_name = 'pages/student_page.html'
-#     context_object_name = 'student'
-#     form_class = StudentForm
-#
-#     def get_object(self):
-#         # curator_index = self.request.user.id
-#         last_name = self.kwargs['last_name']
-#         return get_object_or_404(Student, last_name=last_name)
-
-
 def StudentDetailView(request, last_name, group):
     if request.method == 'POST':
         if 'form1-submit' in request.POST:
@@ -163,6 +150,7 @@ class AllStudentsFromGroupListView(ListView):
         context['group'] = group
         return context
 
+
 @login_required
 def show_group_report(request, group):
     date_today = date.today()
@@ -173,7 +161,6 @@ def show_group_report(request, group):
                      month=str(date_today.month).zfill(2),
                      year=date_today.year
                      )
-    print(date_dict)
     minor_students_count = Student.objects.filter(
         Q(dateBirth__year__gt=legal_year) |
         Q(dateBirth__year=legal_year, dateBirth__month__gt=date_today.month) |
@@ -341,7 +328,6 @@ def show_group_report(request, group):
             sheet['AF1'] = 'ОПФР'
             sheet['AG1'] = 'Да'
             sheet['AH1'] = 'Нет'
-
             sheet['A2'] = table_data[0]
             sheet['B2'] = table_data[1]
             sheet['C2'] = table_data[2]
@@ -402,14 +388,3 @@ def show_group_report(request, group):
         'report_data': table_data
     }
     return render(request, 'pages/group_report_page.html', context=context)
-
-from django.shortcuts import redirect
-
-from django.shortcuts import redirect
-
-def return_to_previous_page(request):
-    # Получите предыдущий URL из HTTP-заголовка Referer
-    previous_page = request.META.get('HTTP_REFERER')
-
-    # Перенаправьте пользователя на предыдущую страницу
-    return redirect(previous_page)

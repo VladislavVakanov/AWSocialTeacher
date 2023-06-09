@@ -20,26 +20,20 @@
                     <a href="{% url 'students:show_psychologist_page' %}" class="logo">AWST</a>
                 {% endif %}
             </div>
-            <div class="page-name">
-                <span style="color: #000; margin-right: 70px; font-size: 17px;">Личный кабинет</span>
-            </div>
+            <span class="nav-name">Личный кабинет</span>
             <div class="navbar-container">
-                <nav class="navbar">
-                    <ul>
-                        <a href="{% url 'user:profile' %}">
-                            <li class="item">
-                                <img src="{% static 'files/settings-icon.svg' %}" alt="img">
-                            </li>
-                        </a>
-                    </ul>
-                </nav>
-            </div>
+            <nav class="navbar">
+                <ul>
+                    <a href="{% url 'user:spravka' %}">
+                        <li class="item">
+                            <img src="{% static 'files/info.svg' %}" alt="img">
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+        </div>
         </header>
-
         <div class="forms-container">
-            <div class="c">
-                <button class="back-button" onclick="goBack()">&#8592;</button>
-            </div>
             <form class="profile-form" action="{% url 'user:profile' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form">
@@ -97,6 +91,7 @@
                     <button class="save-button" type="submit" value="Сохранить">Сохранить</button>
                 </div>
             </form>
+            <div class="left-container">
             <div class="history-container">
                 <div class="container-name">
                     <h4>История изменений</h4>
@@ -116,7 +111,7 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
+            </div>
     </div>
   </body>
 </html>

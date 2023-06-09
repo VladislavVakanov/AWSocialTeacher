@@ -56,7 +56,7 @@
   }
 
   .content {
-    margin: 80px 0 0 0;
+    margin: 90px 0 0 0;
   }
 
   .sidebar {
@@ -149,3 +149,19 @@
     display: flex;
     justify-content: center;
   }
+
+  .nav-name {
+    padding-right: 65px;
+    font-weight: 1000;
+    font-size: 18px;
+  }
+
+  .description {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 700px;
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+

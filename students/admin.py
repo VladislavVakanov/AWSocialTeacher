@@ -26,6 +26,7 @@ class AllIncentives(admin.StackedInline):
     def __str__(self):
         return 'Custom Label'
 
+
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ['group_number', 'get_html_photo', 'last_name', 'first_name', 'otchestvo']
@@ -34,7 +35,7 @@ class StudentAdmin(admin.ModelAdmin):
     ordering = ['group_number', 'last_name', 'first_name']
     exclude = ['incentives', 'antisocial_behavior', 'specialist_recommendations', 'individualwork', 'workwithparents']
     list_per_page = 30
-    actions = ['set_group', 'import_csv']
+    actions = ['set_group']
     search_fields = ['group_number__group_number' ,'last_name', 'first_name', 'otchestvo']
     list_filter = ['group_number']
     inlines = [AllIncentives]
@@ -49,7 +50,6 @@ class StudentAdmin(admin.ModelAdmin):
         if object.image:
             return mark_safe(f"<img src='{object.image.url}' width=100px>")
 
-
     get_html_photo.short_description = 'Фотография'
 
 
@@ -59,7 +59,6 @@ class GroupAdmin(admin.ModelAdmin):
     ordering = ['group_number']
     list_per_page = 30
     search_fields = ['group_number']
-    inlines = [AllStudents]
 
 
 

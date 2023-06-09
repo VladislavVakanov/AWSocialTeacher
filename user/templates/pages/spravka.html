@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AWST</title>
+    <link rel="stylesheet" href="{% static 'css/spravka.css' %}">
+</head>
+<body>
+    <div class="content">
+        <header>
+            <div class="rectangle">
+                {% if user.role == "Куратор" %}
+                    <a href="{% url 'students:show_curator_page' %}" class="logo">AWST</a>
+                {% elif user.role == "Социальный педагог" %}
+                    <a href="{% url 'students:show_social_teacher_page' %}" class="logo">AWST</a>
+                {% elif user.role == "Педагог-психолог" %}
+                    <a href="{% url 'students:show_psychologist_page' %}" class="logo">AWST</a>
+                {% endif %}
+            </div>
+            <span class="nav-name">Справка</span>
+            <nav class="navbar">
+                <ul>
+                    <a href="{% url 'user:profile' %}">
+                        <li class="item">
+                            <img src="{% static 'files/settings-icon.svg' %}" alt="img">
+                        </li>
+                    </a>
+                </ul>
+            </nav>
+        </header>
+        <div class="info-container">
+            <div class="info">
+              <h1>Название веб-приложения - AWST</h1>
+              <p>Разработал - Ваканов Владислав Александрович</p>
+              <p>Учебное заведение - УО "МГК цифровых технологий"</p>
+              <p>Дипломный проект</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

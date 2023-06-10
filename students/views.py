@@ -65,6 +65,7 @@ class PsychologistListView(ListView):
     ordering = 'group_number'
 
 
+@login_required
 def StudentDetailView(request, last_name, group):
     if request.method == 'POST':
         if 'form1-submit' in request.POST:
@@ -135,7 +136,7 @@ def StudentDetailView(request, last_name, group):
     return render(request, 'pages/student_page.html', context)
 
 
-
+@method_decorator(login_required, name='dispatch')
 class AllStudentsFromGroupListView(ListView):
     template_name = 'pages/students_list_page.html'
     context_object_name = 'students'

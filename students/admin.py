@@ -39,6 +39,7 @@ class StudentAdmin(admin.ModelAdmin):
     search_fields = ['group_number__group_number' ,'last_name', 'first_name', 'otchestvo']
     list_filter = ['group_number']
     inlines = [AllIncentives]
+    save_on_top = True
     @admin.action(description='Установить группу ученикам')
     def set_group(self, request, qs: QuerySet):
         selected_group = request.POST.get(

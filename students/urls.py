@@ -1,7 +1,7 @@
 from django.urls import path
 
 from students.views import (StudentListView, StudentDetailView, AllStudentsFromGroupListView,
-                            show_group_report, SocialTeacherListView, PsychologistListView, return_to_previous_page)
+                            show_group_report, SocialTeacherListView, PsychologistListView)
 
 app_name = 'students'
 
